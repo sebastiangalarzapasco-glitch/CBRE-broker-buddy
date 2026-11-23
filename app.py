@@ -28,7 +28,16 @@ def globals_():
         "review_count": db.one("SELECT COUNT(*) n FROM emails WHERE status='Draft'")["n"],
         "nav": request.endpoint,
         "reminder": meetings.reminder(),
+        "client_logo": client_logo(),
     }
+
+
+def client_logo():
+    """Drop a logo file at static/brand/client-logo.png (or .svg) once the client approves it."""
+    for ext in ("svg", "png"):
+        if os.path.exists(os.path.join(app.static_folder, "brand", f"client-logo.{ext}")):
+            return url_for("static", filename=f"brand/client-logo.{ext}")
+    return None
 
 
 def deal_view(d):

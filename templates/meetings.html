@@ -19,7 +19,7 @@
       <div><label class="l" for="deal_id">Deal</label><select name="deal_id" id="deal_id">{% for d in deals %}<option value="{{ d.id }}">{{ d.name }}</option>{% endfor %}</select></div>
       <div><label class="l" for="contact_id">With</label><select name="contact_id" id="contact_id">{% for c in contacts %}<option value="{{ c.id }}">{{ c.name }} · {{ c.company }}</option>{% endfor %}</select></div>
       <div><label class="l" for="title">What</label><input type="text" name="title" id="title" value="Check-in call"></div>
-      <div><label class="l" for="start">When</label><input type="datetime-local" name="start" id="start" value="{{ default_start }}" style="width:100%;font:15px Inter,system-ui,sans-serif;border:1px solid var(--line);border-radius:10px;padding:10px 12px"></div>
+      <div><label class="l" for="start">When</label><input type="datetime-local" name="start" id="start" value="{{ default_start }}" style="width:100%;font:15px Figtree,system-ui,sans-serif;border:1px solid var(--line);border-radius:10px;padding:10px 12px"></div>
       <div><label class="l" for="location">Where</label><input type="text" name="location" id="location" placeholder="Phone, office, property"></div>
       <button class="btn primary" style="justify-content:center">Add meeting</button>
       <p class="small faint" style="margin:0">Tip for the demo: the default time is 20 minutes from now, so the reminder banner shows up right away.</p>

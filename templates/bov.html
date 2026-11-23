@@ -24,7 +24,7 @@
       <h1>{{ d.name }}</h1>
       <p class="sub">{{ d.address }} · {{ d.asset_type }} · {{ '{:,.0f}'.format(d.size) }} {{ d.size_unit }} · Built {{ d.year_built }}</p>
     </div>
-    <div class="bov-meta small muted">Prepared {{ fmt_date(b.as_of) }}<br>For {{ d.seller }}<br>{% if row.source == 'claude' %}<span class="chip green">Summary by Claude, figures by code</span>{% else %}<span class="chip">Summary from template, figures by code</span>{% endif %}</div>
+    <div class="bov-meta small muted">{% if client_logo %}<img class="bov-client" src="{{ client_logo }}" alt="Client logo">{% endif %}Prepared {{ fmt_date(b.as_of) }}<br>For {{ d.seller }}<br>{% if row.source == 'claude' %}<span class="chip green">Summary by Claude, figures by code</span>{% else %}<span class="chip">Summary from template, figures by code</span>{% endif %}</div>
   </header>
 
   <section class="bov-values">
@@ -78,6 +78,6 @@
     <div class="bov-comps">To be added from CBRE's comparable sales data before this goes to the client. Broker Buddy does not invent comps.</div>
   </section>
 
-  <footer class="small faint bov-foot">This is a broker opinion of value for discussion, not an appraisal. Figures are calculated from the deal record; the broker reviews every page before it is shared. Confidential internal estimates are never included. Synthetic data · Broker Buddy prototype.</footer>
+  <footer class="small faint bov-foot">This is a broker opinion of value for discussion, not an appraisal. Figures are calculated from the deal record; the broker reviews every page before it is shared. Confidential internal estimates are never included. Synthetic data · Broker Buddy, a prototype by QuadFrog Consulting for CBRE.</footer>
 </article>
 {% endblock %}

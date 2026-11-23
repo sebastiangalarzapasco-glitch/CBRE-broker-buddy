@@ -60,6 +60,12 @@ To install it like an app:
 
 It opens full screen with its own icon. Files: `static/manifest.webmanifest`, `static/sw.js` (served at `/sw.js`) and `static/icons/`.
 
+## Look and feel
+
+CBRE-style theme: deep green `#003F2D` with a bright green accent `#17E88F`, Figtree for text and Source Serif 4 for headings and key figures (free Google Fonts that are close to CBRE's licensed typefaces). The colors are set as variables at the top of `static/style.css`.
+
+Every screen says "Prototype by QuadFrog Consulting for CBRE". The CBRE logo is **not** included. Once CBRE approves its use, put the file at `static/brand/client-logo.svg` (or `.png`) and it appears in the sidebar and on the BOV automatically.
+
 ## BOV (Broker Opinion of Value)
 
 On any deal page, **Create BOV** builds a draft BOV:
