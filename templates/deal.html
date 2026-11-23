@@ -11,7 +11,7 @@
     <div><div class="v">{{ '%.0f'|format(d.occupancy*100) }}%</div><div class="l">Occupied</div></div>
   </div>
 </div>
-{% if not shared %}<div style="display:flex;justify-content:flex-end;gap:8px;margin:-6px 0 16px"><button class="btn sm" onclick="navigator.clipboard.writeText(location.origin+'{{ url_for('share', token=d.share_token) }}');this.textContent='Link copied'">Share with team</button><a class="btn sm primary" href="{{ url_for('debrief') }}">New debrief</a></div>{% endif %}
+{% if not shared %}<div style="display:flex;justify-content:flex-end;gap:8px;margin:-6px 0 16px"><button class="btn sm" onclick="navigator.clipboard.writeText(location.origin+'{{ url_for('share', token=d.share_token) }}');this.textContent='Link copied'">Share with team</button><a class="btn sm" href="{{ url_for('deal_bov', deal_id=d.id) }}">Create BOV</a><a class="btn sm primary" href="{{ url_for('debrief') }}">New debrief</a></div>{% endif %}
 
 <div class="grid g32">
   <div class="grid" style="align-content:start">

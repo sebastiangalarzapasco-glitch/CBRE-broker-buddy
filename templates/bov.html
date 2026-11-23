@@ -1,0 +1,83 @@
+{% extends "base.html" %}{% block title %}BOV · {{ b.deal.name }}{% endblock %}
+{% block body %}
+{% set d = b.deal %}{% set m = b.metrics %}
+<div class="no-print bov-actions">
+  <a class="btn sm ghost" href="{{ url_for('deal', deal_id=d.id) }}">← {{ d.name }}</a>
+  <button class="btn sm primary" onclick="window.print()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg>Download PDF</button>
+</div>
+
+<details class="card no-print bov-adjust">
+  <summary><b>Adjust cap rates</b> <span class="small muted">Now {{ '%.2f'|format(b.caps[0]*100) }}% · {{ '%.2f'|format(b.caps[1]*100) }}% · {{ '%.2f'|format(b.caps[2]*100) }}%</span></summary>
+  <form method="post" class="bov-form">
+    <div><label class="l" for="cap_low">Low (%)</label><input type="text" inputmode="decimal" name="cap_low" id="cap_low" value="{{ '%.2f'|format(b.caps[0]*100) }}"></div>
+    <div><label class="l" for="cap_mid">Midpoint (%)</label><input type="text" inputmode="decimal" name="cap_mid" id="cap_mid" value="{{ '%.2f'|format(b.caps[1]*100) }}"></div>
+    <div><label class="l" for="cap_high">High (%)</label><input type="text" inputmode="decimal" name="cap_high" id="cap_high" value="{{ '%.2f'|format(b.caps[2]*100) }}"></div>
+    <button class="btn primary">Recalculate</button>
+  </form>
+  <p class="small faint" style="margin:8px 0 0">Values are recalculated in code. The summary is rewritten from the new figures.</p>
+</details>
+
+<article class="card bov">
+  <header class="bov-head">
+    <div>
+      <div class="eyebrow">Broker Opinion of Value · Draft for broker review</div>
+      <h1>{{ d.name }}</h1>
+      <p class="sub">{{ d.address }} · {{ d.asset_type }} · {{ '{:,.0f}'.format(d.size) }} {{ d.size_unit }} · Built {{ d.year_built }}</p>
+    </div>
+    <div class="bov-meta small muted">Prepared {{ fmt_date(b.as_of) }}<br>For {{ d.seller }}<br>{% if row.source == 'claude' %}<span class="chip green">Summary by Claude, figures by code</span>{% else %}<span class="chip">Summary from template, figures by code</span>{% endif %}</div>
+  </header>
+
+  <section class="bov-values">
+    {% for v in b['values'] %}
+    <div class="bov-v {{ 'mid' if loop.index == 2 }}">
+      <div class="l">{{ v.label }}</div>
+      <div class="n">{{ money(v.value) }}</div>
+      <div class="small muted">{{ '%.2f'|format(v.cap*100) }}% cap · ${{ '{:,.0f}'.format(v.per_unit) }} {{ b.unit_label }}</div>
+    </div>
+    {% endfor %}
+  </section>
+  <p class="small faint bov-basis">T-12 NOI ${{ '{:,.0f}'.format(d.noi) }} ÷ cap rate, rounded to the nearest $100,000. Cap rates: {{ b.basis }}.{% if b.seller_expectation %} Seller's stated expectation: ${{ '{:,.0f}'.format(b.seller_expectation) }}.{% endif %}</p>
+
+  <section class="bov-sec">
+    <h2>Executive summary</h2>
+    <p>{{ row.summary }}</p>
+    <ul class="bov-hl">{% for h in highlights %}<li>{{ h }}</li>{% endfor %}</ul>
+  </section>
+
+  <section class="bov-sec">
+    <h2>{{ 'Rent roll' if m.kind == 'commercial' else 'Unit mix' }}</h2>
+    <div class="bov-kpis">
+      {% if m.kind == 'commercial' %}
+      <div><div class="n">{{ '%.0f'|format(m.occupancy*100) }}%</div><div class="l">Leased</div></div>
+      <div><div class="n">${{ '{:,.0f}'.format(m.annual_rent) }}</div><div class="l">Annual base rent</div></div>
+      <div><div class="n">${{ '%.2f'|format(m.avg_rent_psf) }}</div><div class="l">Avg rent per SF</div></div>
+      <div><div class="n">{{ '%.1f'|format(m.walt) }} yrs</div><div class="l">Weighted avg lease term</div></div>
+      {% else %}
+      <div><div class="n">{{ '%.1f'|format(m.occupancy*100) }}%</div><div class="l">Occupied ({{ m.occupied }} of {{ m.units }})</div></div>
+      <div><div class="n">${{ '{:,.0f}'.format(m.annual_gpr) }}</div><div class="l">Gross potential rent / yr</div></div>
+      <div><div class="n">${{ '{:,.0f}'.format(m.avg_rent) }}</div><div class="l">Avg rent per unit / mo</div></div>
+      <div><div class="n">{{ m.units }}</div><div class="l">Units</div></div>
+      {% endif %}
+    </div>
+  </section>
+
+  {% if b.notes %}
+  <section class="bov-sec">
+    <h2>From the broker's debriefs</h2>
+    {% for n in b.notes %}<div class="point"><div><b>{{ n.label }}:</b> {{ n.value }}{% if n.calculated %} <span class="chip">Calculated</span>{% elif n.evidence %} <span class="faint small">"{{ n.evidence }}"</span>{% endif %}</div></div>{% endfor %}
+  </section>
+  {% endif %}
+
+  <section class="bov-sec">
+    <h2>Risks and assumptions</h2>
+    {% for r in b.risks %}<div class="point">{{ r }}</div>{% endfor %}
+  </section>
+
+  <section class="bov-sec">
+    <h2>Comparable sales</h2>
+    <div class="bov-comps">To be added from CBRE's comparable sales data before this goes to the client. Broker Buddy does not invent comps.</div>
+  </section>
+
+  <footer class="small faint bov-foot">This is a broker opinion of value for discussion, not an appraisal. Figures are calculated from the deal record; the broker reviews every page before it is shared. Confidential internal estimates are never included. Synthetic data · Broker Buddy prototype.</footer>
+</article>
+{% endblock %}

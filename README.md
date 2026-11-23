@@ -60,6 +60,18 @@ To install it like an app:
 
 It opens full screen with its own icon. Files: `static/manifest.webmanifest`, `static/sw.js` (served at `/sw.js`) and `static/icons/`.
 
+## BOV (Broker Opinion of Value)
+
+On any deal page, **Create BOV** builds a draft BOV:
+- Value range: T-12 NOI ÷ three cap rates, rounded to the nearest $100,000, plus value per SF or unit. All math is in `bov.py`, not the AI.
+- Midpoint cap rate: the cap rate on the agreed price if the deal has one; otherwise a placeholder by asset type, labelled "confirm with CBRE research". The broker can change all three cap rates on the page.
+- Rent roll or unit mix metrics (occupancy, base rent, average rent, rent-weighted lease term), seller notes from the debriefs, and risks.
+- Claude writes only the summary and highlights (live mode). Any dollar figure that isn't in the calculated set, or that matches a confidential internal estimate, rejects the text and the template is used instead.
+- Comparable sales stay empty until CBRE provides comps. Broker Buddy does not invent them.
+- **Download PDF** uses the browser's print, with a clean print layout.
+
+Tests: `tests/test_bov.py` checks the Northpoint values ($31.1M / $29.7M / $28.4M at 5.25% / 5.50% / 5.75%), the rent roll math and the confidential-figure guard.
+
 ## Put it on a public link (Render)
 
 1. Push this folder to a GitHub repository.
@@ -72,7 +84,7 @@ The free plan sleeps after 15 minutes idle (the first visit takes about 30 secon
 ## Tests
 
 ```
-python -m pytest -q          # 27 tests against the answer key, no API key needed
+python -m pytest -q          # 34 tests against the answer key, no API key needed
 python eval_golden.py        # scores the LIVE model against the answer key (needs a key)
 python eval_golden.py turbo  # same, fastest model
 ```
@@ -111,6 +123,7 @@ The answer key is `docs/Broker_Buddy_Answer_Key.xlsx` (same data as `data/golden
 | `ai.py` | Claude calls (extraction and email drafts) and Sample mode |
 | `guards.py` | Code checks: quotes, names, money figures, wire warnings |
 | `meetings.py` | Sample calendar, reminders, prep briefs (no AI) |
+| `bov.py` | Broker Opinion of Value: valuation math, rent roll metrics, narrative check |
 | `db.py` | SQLite schema and seed data |
 | `fixtures.py` | Recorded answers for Sample mode and tests |
 | `data/golden_set.json` | Answer key (synthetic deals, contacts, debriefs, expected results) |

@@ -6,6 +6,7 @@ import os
 from flask import Flask, abort, flash, redirect, render_template, request, send_from_directory, url_for
 
 import ai
+import bov
 import db
 import engine
 import guards
@@ -15,6 +16,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("BB_SECRET", "broker-buddy-dev")
 db.init(reset=os.environ.get("BB_RESET_ON_START") == "1")
 meetings.ensure_table()
+bov.ensure_table()
 
 TEAM = ["C01", "C02", "C03"]
 
@@ -75,6 +77,30 @@ def deal_bundle(deal_id):
         "alerts": engine.alerts(deal_id),
         "today_d": engine.today(),
     }
+
+
+@app.route("/deals/<deal_id>/bov", methods=["GET", "POST"])
+def deal_bov(deal_id):
+    db.one("SELECT id FROM deals WHERE id=?", deal_id) or abort(404)
+    if request.method == "POST":
+        try:
+            caps = tuple(round(float(request.form[k]) / 100, 4) for k in ("cap_low", "cap_mid", "cap_high"))
+            if not all(0.02 <= c <= 0.15 for c in caps) or not caps[0] < caps[1] < caps[2]:
+                raise ValueError
+        except (KeyError, ValueError):
+            flash("Cap rates must be between 2% and 15%, from low to high.", "error")
+            return redirect(url_for("deal_bov", deal_id=deal_id))
+        bov.create(deal_id, caps)
+        flash("BOV updated with your cap rates.", "ok")
+        return redirect(url_for("deal_bov", deal_id=deal_id))
+    row = bov.latest(deal_id)
+    if row is None:
+        bov.create(deal_id)
+        row = bov.latest(deal_id)
+    b = bov.build(deal_id, (row["cap_low"], row["cap_mid"], row["cap_high"]))
+    if row["cap_mid"] == bov.default_caps(b["deal"], engine.current_terms(deal_id))[1]:
+        b["basis"] = bov.default_caps(b["deal"], engine.current_terms(deal_id))[3]
+    return render_template("bov.html", b=b, row=row, highlights=json.loads(row["highlights"]), money=bov.fmt_money_short)
 
 
 @app.route("/share/<token>")
@@ -248,6 +274,7 @@ def service_worker():
 def reset():
     db.init(reset=True)
     meetings.ensure_table()
+    bov.ensure_table()
     flash("Demo data reset. All debriefs, emails and changes were cleared.", "ok")
     return redirect(url_for("today"))
 
