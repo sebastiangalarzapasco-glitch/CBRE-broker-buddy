@@ -50,6 +50,16 @@ $env:BB_TODAY="2026-11-04"; $env:BB_NOW="2026-11-04T13:40"; $env:BB_RESET_ON_STA
 python app.py
 ```
 
+## Use it on a phone
+
+Open the hosted link on your phone. Below 820 px wide, the app switches to a phone layout: a bottom tab bar with a big mic button in the middle, larger tap targets, and screens that stack.
+
+To install it like an app:
+- **iPhone (Safari):** Share button, then **Add to Home Screen**.
+- **Android (Chrome):** menu (⋮), then **Install app** or **Add to Home screen**.
+
+It opens full screen with its own icon. Files: `static/manifest.webmanifest`, `static/sw.js` (served at `/sw.js`) and `static/icons/`.
+
 ## Put it on a public link (Render)
 
 1. Push this folder to a GitHub repository.

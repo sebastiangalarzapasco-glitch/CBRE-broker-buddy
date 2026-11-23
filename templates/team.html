@@ -4,9 +4,9 @@
 <p class="sub">Every task from every debrief, assigned to a person. Share a read-only deal brief with one link.</p></div></div>
 {% if unassigned %}
 <div class="card" style="margin-bottom:18px"><h2>Needs an owner</h2>
-  {% for a in unassigned %}<div style="display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)">
+  {% for a in unassigned %}<div class="assign-row" style="display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)">
     <div style="flex:1"><b class="small">{{ a.description }}</b><div class="small faint">{{ a.deal }} · "{{ a.evidence }}"</div></div>
-    <form method="post" action="{{ url_for('assign', aid=a.id) }}" style="display:flex;gap:8px"><select name="owner" style="width:170px">{% for p in people %}<option value="{{ p.id }}">{{ p.name }}</option>{% endfor %}</select><button class="btn sm primary">Assign</button></form></div>{% endfor %}
+    <form method="post" action="{{ url_for('assign', aid=a.id) }}" class="assign-form" style="display:flex;gap:8px"><select name="owner" style="width:170px">{% for p in people %}<option value="{{ p.id }}">{{ p.name }}</option>{% endfor %}</select><button class="btn sm primary">Assign</button></form></div>{% endfor %}
 </div>{% endif %}
 <div class="grid g3">
 {% for p in people %}

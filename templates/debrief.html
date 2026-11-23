@@ -13,8 +13,8 @@
     <label class="l" for="transcript" style="margin-top:16px">Debrief</label>
     <textarea name="transcript" id="transcript" rows="9" placeholder="e.g. Debrief, Northpoint Logistics Center. Met Priya Raman from Halvorsen. They're in at twenty nine point seven million...">{{ text }}</textarea>
     <div class="small faint" id="wc" style="margin-top:6px">0 words</div>
-    <div style="display:flex;gap:14px;align-items:end;margin-top:14px;flex-wrap:wrap">
-      <div style="width:180px"><label class="l" for="date">Meeting date</label><input type="date" name="date" id="date" value="{{ date }}"></div>
+    <div class="ctrl" style="display:flex;gap:14px;align-items:end;margin-top:14px;flex-wrap:wrap">
+      <div class="datebox" style="width:180px"><label class="l" for="date">Meeting date</label><input type="date" name="date" id="date" value="{{ date }}"></div>
       <div><label class="l">Speed</label><div class="seg"><input type="radio" name="speed" id="s1" value="turbo"><label for="s1">Fastest</label><input type="radio" name="speed" id="s2" value="balanced" checked><label for="s2">Most careful</label></div></div>
       <button class="btn primary" id="go" style="margin-left:auto"><span id="golabel">Process debrief</span></button>
     </div>

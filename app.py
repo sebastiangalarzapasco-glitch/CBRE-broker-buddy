@@ -3,7 +3,7 @@ import datetime as dt
 import json
 import os
 
-from flask import Flask, abort, flash, redirect, render_template, request, url_for
+from flask import Flask, abort, flash, redirect, render_template, request, send_from_directory, url_for
 
 import ai
 import db
@@ -234,6 +234,14 @@ def meeting_debrief(mid):
 @app.route("/how-it-works")
 def how():
     return render_template("how.html")
+
+
+@app.route("/sw.js")
+def service_worker():
+    """Served from the site root so it can make the whole app installable on a phone."""
+    resp = send_from_directory(app.static_folder, "sw.js", mimetype="application/javascript")
+    resp.headers["Cache-Control"] = "no-cache"
+    return resp
 
 
 @app.post("/reset")
