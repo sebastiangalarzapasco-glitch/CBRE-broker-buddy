@@ -9,6 +9,7 @@ import ai
 import bov
 import db
 import engine
+import goals
 import guards
 import meetings
 
@@ -17,6 +18,7 @@ app.secret_key = os.environ.get("BB_SECRET", "broker-buddy-dev")
 db.init(reset=os.environ.get("BB_RESET_ON_START") == "1")
 meetings.ensure_table()
 bov.ensure_table()
+goals.ensure_table()
 
 TEAM = ["C01", "C02", "C03"]
 
@@ -110,6 +112,31 @@ def deal_bov(deal_id):
     if row["cap_mid"] == bov.default_caps(b["deal"], engine.current_terms(deal_id))[1]:
         b["basis"] = bov.default_caps(b["deal"], engine.current_terms(deal_id))[3]
     return render_template("bov.html", b=b, row=row, highlights=json.loads(row["highlights"]), money=bov.fmt_money_short)
+
+
+@app.route("/goals", methods=["GET", "POST"])
+def goals_page():
+    if request.method == "POST":
+        if request.form.get("action") == "reset":
+            goals.reset()
+            flash("Back to the example assumptions.", "ok")
+            return redirect(url_for("goals_page"))
+        values, errors = goals.parse(request.form)
+        if errors:
+            for e in errors:
+                flash(e, "error")
+            return redirect(url_for("goals_page"))
+        goals.save(values)
+        flash("Goal saved. Your plan is recalculated.", "ok")
+        return redirect(url_for("goals_page"))
+    values, saved = goals.load()
+    f = goals.funnel(values)
+    pace = goals.actual_pace()
+    checks = {
+        "meetings": goals.compare(f["by_key"]["meetings"]["per_week"], pace["meetings_pw"]),
+        "pitches": goals.compare(f["by_key"]["pitches"]["per_week"], pace["pitches_pw"]),
+    }
+    return render_template("goals.html", v=values, saved=saved, f=f, pace=pace, checks=checks, fields=goals.FIELDS)
 
 
 @app.route("/share/<token>")

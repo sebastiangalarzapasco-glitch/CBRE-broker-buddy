@@ -60,6 +60,17 @@ To install it like an app:
 
 It opens full screen with its own icon. Files: `static/manifest.webmanifest`, `static/sw.js` (served at `/sw.js`) and `static/icons/`.
 
+## Goals (income goal, worked backwards)
+
+The **Goals** page (sidebar, or the target icon on a phone) turns an income goal into the activity it takes:
+income goal → deals to close → listings to win → BOVs / pitches → client meetings → people to contact, plus weekly and monthly targets. Each step rounds up; the math is in `goals.py`.
+
+The default assumptions ($25M average deal, 1% fee, 40% share, 70% / 30% / 25% / 10% conversion, 48 weeks) are **examples**, labelled in the app, until the broker enters their own or CBRE shares real figures.
+
+**Actual pace** comes from what the app already records, with no extra typing: debriefs in the last 4 weeks count as meetings and BOVs count as pitches. Contacts will come from the CRM once connected.
+
+Tests: `tests/test_goals.py` checks the worked example ($500K → 5 → 8 → 27 → 108 → 1,080).
+
 ## Look and feel
 
 CBRE-style theme: deep green `#003F2D` with a bright green accent `#17E88F`, Figtree for text and Source Serif 4 for headings and key figures (free Google Fonts that are close to CBRE's licensed typefaces). The colors are set as variables at the top of `static/style.css`.
@@ -90,7 +101,7 @@ The free plan sleeps after 15 minutes idle (the first visit takes about 30 secon
 ## Tests
 
 ```
-python -m pytest -q          # 34 tests against the answer key, no API key needed
+python -m pytest -q          # 39 tests against the answer key, no API key needed
 python eval_golden.py        # scores the LIVE model against the answer key (needs a key)
 python eval_golden.py turbo  # same, fastest model
 ```
@@ -130,6 +141,7 @@ The answer key is `docs/Broker_Buddy_Answer_Key.xlsx` (same data as `data/golden
 | `guards.py` | Code checks: quotes, names, money figures, wire warnings |
 | `meetings.py` | Sample calendar, reminders, prep briefs (no AI) |
 | `bov.py` | Broker Opinion of Value: valuation math, rent roll metrics, narrative check |
+| `goals.py` | Income goal worked backwards into weekly activity, and actual pace |
 | `db.py` | SQLite schema and seed data |
 | `fixtures.py` | Recorded answers for Sample mode and tests |
 | `data/golden_set.json` | Answer key (synthetic deals, contacts, debriefs, expected results) |

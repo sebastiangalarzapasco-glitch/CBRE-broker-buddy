@@ -20,7 +20,8 @@
  'emails':'<path d="M4 6h16v12H4zM4 7l8 6 8-6"/>',
  'team':'<path d="M16 19v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1m17 0v-1a4 4 0 0 0-3-3.9M13 4.1a4 4 0 0 1 0 7.8M9.5 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/>',
  'meet':'<path d="M12 8v4l3 2M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"/>',
- 'how':'<path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm0-6v-4m0-4h.01"/>'} %}
+ 'how':'<path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm0-6v-4m0-4h.01"/>',
+ 'goal':'<path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm0-4a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>'} %}
 <div class="app">
 {% if not shared %}
 <aside class="side">
@@ -33,6 +34,7 @@
     <a href="{{ url_for('deal', deal_id='D1') }}" class="{{ 'on' if nav=='deal' }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.deals|safe }}</svg>Deals</a>
     <a href="{{ url_for('emails') }}" class="{{ 'on' if nav=='emails' }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.emails|safe }}</svg>Review emails{% if review_count %}<span class="badge">{{ review_count }}</span>{% endif %}</a>
     <a href="{{ url_for('team') }}" class="{{ 'on' if nav=='team' }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.team|safe }}</svg>Team</a>
+    <a href="{{ url_for('goals_page') }}" class="{{ 'on' if nav=='goals_page' }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.goal|safe }}</svg>Goals</a>
     <a href="{{ url_for('how') }}" class="{{ 'on' if nav=='how' }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.how|safe }}</svg>How it works</a>
   </nav>
   <div class="side-foot">
@@ -47,6 +49,7 @@
   <a class="brand" href="{{ url_for('today') }}"><span class="mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span>Broker Buddy</a>
   <span class="mode"><span class="dot {{ '' if live else 'amber' }}"></span>{{ 'Live' if live else 'Sample' }}</span>
   <a class="mlink" href="{{ url_for('deal', deal_id='D1') }}" aria-label="Deals"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.deals|safe }}</svg></a>
+  <a class="mlink" href="{{ url_for('goals_page') }}" aria-label="Goals"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.goal|safe }}</svg></a>
   <a class="mlink" href="{{ url_for('how') }}" aria-label="How it works"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.how|safe }}</svg></a>
 </header>
 {% endif %}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}{% block title %}Goals{% endblock %}
+{% block body %}
+<div class="ph"><div><div class="eyebrow">Your number, worked backwards</div><h1>What it takes to hit ${{ '{:,.0f}'.format(v.income_goal) }}</h1>
+<p class="sub">From your income goal to the deals, BOVs, meetings and outreach it takes, and how your real pace compares.</p></div></div>
+
+<div class="grid g32">
+  <div class="grid" style="align-content:start">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+        <h2 style="margin:0">Your plan for the year</h2>
+        {% if saved %}<span class="chip green">Your assumptions</span>{% else %}<span class="chip amber">Example assumptions: enter your own</span>{% endif %}
+      </div>
+      <p class="small muted" style="margin:0 0 14px">Each deal earns you <b>${{ '{:,.0f}'.format(f.per_deal) }}</b> (${{ '{:,.0f}'.format(v.avg_deal) }} × {{ '%g'|format(v.fee_pct) }}% fee × {{ '%g'|format(v.share_pct) }}% share). Every step rounds up.</p>
+      <div class="funnel">
+        {% for s in f.steps %}
+        <div class="fstep" style="--w:{{ 48 + loop.index0*13 }}%">
+          <div class="fbar"><span class="fn">{{ '{:,}'.format(s.n) }}</span><span class="fl">{{ s.label }}</span></div>
+          <div class="fhow small faint">{{ s.how }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>That means</h2>
+      <div class="kpis weekly">
+        {% for key, per, n in [('contacts','per week', f.by_key.contacts.per_week), ('meetings','per week', f.by_key.meetings.per_week), ('pitches','per month', f.by_key.pitches.n / 12), ('listings','per month', f.by_key.listings.n / 12)] %}
+        <div class="kpi"><div class="l">{{ f.by_key[key].label }}</div><div class="v">{{ '%.1f'|format(n) }}</div><div class="small faint">{{ per }}</div></div>
+        {% endfor %}
+      </div>
+      <p class="small faint" style="margin:0">Weekly figures use {{ v.weeks }} working weeks; monthly figures divide the year by 12.</p>
+    </div>
+
+    <div class="card">
+      <h2>Your actual pace <span class="small faint" style="font-weight:500">· last 4 weeks, recorded automatically</span></h2>
+      {% for key, label, have, unit in [('meetings','Client meetings', pace.meetings_pw, 'debriefs logged'), ('pitches','BOVs / pitches', pace.pitches_pw, 'BOVs created')] %}
+      {% set need = f.by_key[key].per_week %}{% set st, ratio = checks[key] %}
+      <div class="pace">
+        <div class="pace-top"><b>{{ label }}</b>
+          <span class="chip {{ 'green' if st=='ok' else 'amber' if st=='close' else 'red' }}">{{ 'On track' if st=='ok' else 'Close' if st=='close' else 'Behind' }}</span></div>
+        <div class="pbar"><span style="width:{{ [ratio*100, 100]|min }}%" class="{{ st }}"></span></div>
+        <div class="small muted">{{ '%.1f'|format(have) }} a week ({{ unit }}) vs {{ '%.1f'|format(need) }} needed{% if st != 'ok' %} · {{ '%.1f'|format(need - have) }} more a week to get there{% endif %}</div>
+      </div>
+      {% endfor %}
+      <div class="pace"><div class="pace-top"><b>People contacted</b><span class="chip">Not tracked yet</span></div>
+        <div class="small muted">Comes from the CRM and email once CBRE's systems are connected (Ask 3).</div></div>
+      <p class="small faint" style="margin:10px 0 0">No extra typing: every debrief counts as a meeting and every BOV as a pitch.</p>
+    </div>
+  </div>
+
+  <div class="grid" style="align-content:start">
+    <form class="card" method="post">
+      <h2>Your assumptions</h2>
+      <p class="small muted" style="margin:-4px 0 12px">Fees, splits and win rates vary by broker and deal type. Replace the examples with your own numbers.</p>
+      {% for k, label, d, kind, rng in fields %}
+      <div class="gfield"><label class="l" for="{{ k }}">{{ label }}</label>
+        <div class="gin"><span class="pre">{{ '$' if kind=='money' else '' }}</span>
+          <input type="text" inputmode="decimal" name="{{ k }}" id="{{ k }}" value="{{ '{:,.0f}'.format(v[k]) if kind=='money' else ('%g'|format(v[k])) }}">
+          <span class="post">{{ '%' if kind=='pct' else '' }}</span></div></div>
+      {% endfor %}
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+        <button class="btn primary" name="action" value="save" style="flex:1">Recalculate</button>
+        {% if saved %}<button class="btn" name="action" value="reset">Use examples</button>{% endif %}
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
