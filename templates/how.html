@@ -1,0 +1,32 @@
+{% extends "base.html" %}{% block title %}How it works{% endblock %}
+{% block body %}
+<div class="ph"><div><div class="eyebrow">AI controlled, not AI first</div><h1>How Broker Buddy works</h1>
+<p class="sub">The model proposes. Code checks every fact against the transcript and the deal record. A broker approves anything that leaves.</p></div></div>
+<div class="flow">
+  <div class="layer"><div class="n">LAYER 1 · CAPTURE</div><h3 style="margin-top:6px">Voice in, text out</h3><p class="small muted">Dictation in the browser (Web Speech API), or typed notes. The broker checks the text before processing.</p></div>
+  <div class="layer"><div class="n">LAYER 2 · INTELLIGENCE</div><h3 style="margin-top:6px">Claude reads the debrief</h3><p class="small muted">Claude Sonnet 5.5 (most careful) or Claude Haiku 5.5 (fastest) returns structured facts. Every value must come with the exact words it was taken from.</p></div>
+  <div class="layer"><div class="n">LAYER 3 · CHECKS AND DATA</div><h3 style="margin-top:6px">One record per deal</h3><p class="small muted">Code verifies quotes, names and numbers, then updates the deal in SQLite, logs what changed and computes dates and cap rates.</p></div>
+  <div class="layer"><div class="n">LAYER 4 · EXPERIENCE</div><h3 style="margin-top:6px">Review, then send</h3><p class="small muted">Today view, deal brief, team board and an email queue. Nothing is sent without a named approver.</p></div>
+</div>
+<div class="grid g2" style="margin-top:18px">
+  <div class="card"><h2>Checks on every debrief</h2><ul class="list small">
+    <li>Every term, task and correction must quote the transcript word for word, or it is marked Needs review.</li>
+    <li>Names must exist in the transcript or the CRM. The model cannot invent a person, company or property.</li>
+    <li>Corrections and rejected proposals are kept, so they can be blocked from every email.</li>
+    <li>Dates are resolved from the meeting date. Deadlines and cap rates are calculated by code, not by the model.</li>
+    <li>Terms not discussed are recorded as Not mentioned instead of guessed.</li></ul></div>
+  <div class="card"><h2>Checks on every email</h2><ul class="list small">
+    <li>Every dollar amount must match the current deal record.</li>
+    <li>Corrected numbers, the other side's rejected proposals and internal estimates are blocked.</li>
+    <li>Any mention of wiring adds a fraud warning: verify instructions by phone.</li>
+    <li>No address on file means no draft. The broker is told instead.</li>
+    <li>Honest status: Draft, Approved, Sent or Failed. Never "Delivered" unless it really was.</li></ul></div>
+  <div class="card"><h2>Tested against an answer key</h2><p class="small muted">Four sample debriefs with hand-checked answers (Broker_Buddy_Answer_Key.xlsx). The automated tests run them on every change, plus tests that feed the checks deliberately wrong model answers.</p></div>
+  <div class="card"><h2>Limitations</h2><ul class="list small">
+    <li>All deals, people and numbers are synthetic until CBRE provides masked data.</li>
+    <li>No live CRM, calendar or market data connection yet.</li>
+    <li>Dictation quality depends on the browser and the room.</li>
+    <li>Sample mode only knows the four sample debriefs; new ones need an API key.</li></ul>
+    {% if not shared %}<form method="post" action="{{ url_for('reset') }}" style="margin-top:12px"><button class="btn sm">Reset demo data</button></form>{% endif %}</div>
+</div>
+{% endblock %}

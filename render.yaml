@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: broker-buddy
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 1 --bind 0.0.0.0:$PORT
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: BB_SECRET
+        generateValue: true
+      - key: BB_TODAY
+        value: "2026-11-04"
+      - key: BB_RESET_ON_START
+        value: "1"

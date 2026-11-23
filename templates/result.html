@@ -1,0 +1,60 @@
+{% extends "base.html" %}{% block title %}Debrief processed{% endblock %}
+{% block body %}{% if drafting %}<meta http-equiv="refresh" content="2">{% endif %}
+<div class="hero">
+  <div><div class="eyebrow">{{ flags.meeting_type or 'Debrief' }} · {{ fmt_date(b.date) }}</div><h1>{{ d.name }}</h1>
+    <p class="sub">{{ flags.counterparty }}{% if b.source=='sample' %} · <span class="chip amber" style="vertical-align:middle">Sample result (recorded answer)</span>{% endif %}</p></div>
+  <div class="hero-stats">
+    <div><div class="v timer">{{ 'Sample' if b.source=='sample' else '%.1f s'|format(b.seconds) }}</div><div class="l">{{ 'Recorded answer' if b.source=='sample' else 'To process' }}</div></div>
+    <div><div class="v">{{ terms|length }}</div><div class="l">Terms</div></div>
+    <div><div class="v">{{ actions|length }}</div><div class="l">Tasks</div></div>
+    <div><div class="v">{{ emails|length }}</div><div class="l">Drafts</div></div>
+  </div>
+</div>
+
+{% if flags.superseded or flags.evidence_failures or flags.invented_names %}
+<div class="card" style="margin-bottom:18px">
+  <h2>Caught for you</h2>
+  {% for s in flags.superseded %}
+  <div class="caught"><b>{{ 'Correction' if s.reason=='correction' else 'Not agreed' }}:</b> {{ s.field }} {{ s.value }} was {{ 'corrected' if s.reason=='correction' else "the other side's proposal" }}, so it is kept out of the record and every email. <span class="faint">"{{ s.evidence }}"</span></div>
+  {% endfor %}
+  {% for kind, f, ev in flags.evidence_failures %}<div class="issue block">Needs review: the {{ kind }} "{{ f }}" could not be matched to the transcript, so it was not trusted.</div>{% endfor %}
+  {% for n in flags.invented_names %}<div class="issue block">"{{ n }}" is not in the transcript or the CRM. It was not used.</div>{% endfor %}
+</div>
+{% endif %}
+
+<div class="grid g2">
+  <div class="card flush">
+    <div class="hd"><h2 style="margin:0">Deal terms</h2><a class="small" href="{{ url_for('deal', deal_id=d.id) }}">Open deal →</a></div>
+    {% for t in terms %}
+    <div class="term"><div class="k">{{ t.label }}</div>
+      <div class="v {{ 'nm' if t.status=='not_mentioned' }}">{{ t.value }}</div>
+      <div>{% if t.field in changed %}<span class="chip blue">Updated</span>{% endif %}
+        {% if t.status=='internal_confidential' %}<span class="chip red">Internal only</span>{% elif t.status=='calculated' %}<span class="chip">Calculated</span>{% elif t.status=='needs_review' %}<span class="chip red">Needs review</span>{% elif t.status=='not_mentioned' %}<span class="chip amber">Not mentioned</span>{% else %}<span class="chip green">From debrief</span>{% endif %}</div>
+      {% if t.evidence %}<div class="ev">"{{ t.evidence }}"</div>{% endif %}
+    </div>
+    {% endfor %}
+    {% if changes %}<div class="hd" style="border-top:1px solid var(--line);border-bottom:0;display:block"><h3>What changed</h3>
+      {% for c in changes %}<div class="small">{{ c.field|replace('_',' ')|capitalize }}: <s class="faint">{{ c.old }}</s> → <b>{{ c.new }}</b></div>{% endfor %}</div>{% endif %}
+  </div>
+  <div class="grid" style="align-content:start">
+    <div class="card">
+      <h2>Who does what, by when</h2>
+      <ul class="list">{% for a in actions %}
+        <li><span class="av {{ 'ext' if a.side!='internal' }}" title="{{ a.owner_label }}">{{ a.owner_label[:1] }}</span>
+          <div style="flex:1"><b class="small">{{ a.description }}</b><div class="small muted">{{ a.owner_label }}{% if a.side=='external' %} · outside party{% endif %}</div></div>
+          <span class="small {{ 'faint' if not a.due_date }}">{{ fmt_date(a.due_date) if a.due_date else a.due_text }}</span></li>{% endfor %}
+      </ul>
+    </div>
+    {% if drafting %}
+    <div class="card"><h2>Writing {{ flags.drafts_planned }} drafts…</h2><p class="small muted">Your deal notes are ready. Drafts appear here in a few seconds.</p></div>
+    {% else %}
+    <div class="card">
+      <h2>Drafts ready for your review</h2>
+      <ul class="list">{% for e in emails %}<li><div style="flex:1"><b class="small">{{ e.to_name }}</b><div class="small muted">{{ e.purpose }}</div></div>{% if e.wire %}<span class="chip red">Wire warning added</span>{% endif %}<span class="chip">Draft</span></li>{% endfor %}</ul>
+      <a class="btn primary" style="margin-top:12px" href="{{ url_for('emails') }}">Review and approve</a>
+    </div>
+    {% endif %}
+    {% if sugg %}<div class="card"><h2>Flagged</h2>{% for s in sugg %}<div class="issue warn">{{ s.text }}</div>{% endfor %}</div>{% endif %}
+  </div>
+</div>
+{% endblock %}

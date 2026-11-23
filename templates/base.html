@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Broker Buddy{% endblock %} · Broker Buddy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+{% set icons = {
+ 'today':'<path d="M3 10h18M7 3v4m10-4v4M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/>',
+ 'debrief':'<path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3Zm6-3a6 6 0 0 1-12 0m6 6v3"/>',
+ 'deals':'<path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 10h.01M15 10h.01"/>',
+ 'emails':'<path d="M4 6h16v12H4zM4 7l8 6 8-6"/>',
+ 'team':'<path d="M16 19v-1a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v1m17 0v-1a4 4 0 0 0-3-3.9M13 4.1a4 4 0 0 1 0 7.8M9.5 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/>',
+ 'meet':'<path d="M12 8v4l3 2M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"/>',
+ 'how':'<path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm0-6v-4m0-4h.01"/>'} %}
+<div class="app">
+{% if not shared %}
+<aside class="side">
+  <div class="brand"><span class="mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span>Broker Buddy</div>
+  <nav class="nav">
+    <a href="{{ url_for('today') }}" class="{{ 'on' if nav=='today' }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.today|safe }}</svg>Today</a>
+    <a href="{{ url_for('meetings_page') }}" class="{{ 'on' if nav in ('meetings_page','meeting_brief') }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.meet|safe }}</svg>Meetings</a>
+    <a href="{{ url_for('debrief') }}" class="{{ 'on' if nav in ('debrief','debrief_result') }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.debrief|safe }}</svg>New debrief</a>
+    <a href="{{ url_for('deal', deal_id='D1') }}" class="{{ 'on' if nav=='deal' }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.deals|safe }}</svg>Deals</a>
+    <a href="{{ url_for('emails') }}" class="{{ 'on' if nav=='emails' }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.emails|safe }}</svg>Review emails{% if review_count %}<span class="badge">{{ review_count }}</span>{% endif %}</a>
+    <a href="{{ url_for('team') }}" class="{{ 'on' if nav=='team' }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.team|safe }}</svg>Team</a>
+    <a href="{{ url_for('how') }}" class="{{ 'on' if nav=='how' }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icons.how|safe }}</svg>How it works</a>
+  </nav>
+  <div class="side-foot">
+    <div class="mode"><span class="dot {{ '' if live else 'amber' }}"></span>{{ 'Live: Claude' if live else 'Sample mode' }}</div>
+    <div style="margin-top:4px">{{ 'Debriefs are read by Claude.' if live else 'Sample debriefs use recorded answers. Add an API key for live mode.' }}</div>
+    <div style="margin-top:10px">Signed in as {{ speaker }}<br>Synthetic data · Prototype</div>
+  </div>
+</aside>
+{% endif %}
+<main {% if shared %}style="grid-column:1/-1;margin:0 auto"{% endif %}>
+  {% if reminder and not shared %}<a class="reminder" href="{{ url_for('meeting_brief', mid=reminder.id) }}"><span class="pulse"></span><span><b>{{ reminder.when }}:</b> {{ reminder.title }} with {{ reminder.contact }} · {{ reminder.deal }}</span><span class="go">Open prep brief →</span></a>{% endif %}
+  {% with msgs = get_flashed_messages(with_categories=true) %}{% for cat, m in msgs %}<div class="flash {{ cat }}">{{ m }}</div>{% endfor %}{% endwith %}
+  {% block body %}{% endblock %}
+</main>
+</div>
+{% block scripts %}{% endblock %}
+</body>
+</html>

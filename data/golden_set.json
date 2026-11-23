@@ -1,0 +1,1192 @@
+{
+  "version": "2026-10-30",
+  "note": "Synthetic golden set for Broker Buddy. Mirrors Broker_Buddy_Answer_Key.xlsx.",
+  "deals": [
+    {
+      "Deal ID": "D1",
+      "Property": "Northpoint Logistics Center",
+      "Address": "2650 Northpoint Blvd, Haslet, TX 76052",
+      "Asset type": "Industrial",
+      "Size": 312000,
+      "Size unit": "SF",
+      "Year built": 2019,
+      "Occupancy": 0.9,
+      "Seller (CBRE client)": "Northpoint Holdings LP",
+      "Seller contact": "Carla Benavides",
+      "Current price ($)": 29300000,
+      "Price basis": "Agreed Nov 20 after roof retrade (was $29.7M)",
+      "T-12 NOI ($)": 1633150.8,
+      "Cap rate on T-12 NOI": 0.0557389351535836,
+      "Price per SF or unit ($)": 93.9102564102564
+    },
+    {
+      "Deal ID": "D2",
+      "Property": "Cedar Row Office",
+      "Address": "1800 Cedar Row Dr, Dallas, TX 75201",
+      "Asset type": "Office",
+      "Size": 86500,
+      "Size unit": "SF",
+      "Year built": 2008,
+      "Occupancy": 0.84971098265896,
+      "Seller (CBRE client)": "Cedar Row Partners LLC",
+      "Seller contact": "Natalie Brooks",
+      "Current price ($)": 18250000,
+      "Price basis": "LOI signed Nov 3",
+      "T-12 NOI ($)": 1239330,
+      "Cap rate on T-12 NOI": 0.0679084931506849,
+      "Price per SF or unit ($)": 210.982658959538
+    },
+    {
+      "Deal ID": "D3",
+      "Property": "Trinity Commons Apartments",
+      "Address": "4100 Trinity Commons Pkwy, Fort Worth, TX 76107",
+      "Asset type": "Multifamily",
+      "Size": 220,
+      "Size unit": "Units",
+      "Year built": 2004,
+      "Occupancy": 0.940909090909091,
+      "Seller (CBRE client)": "Whitley Family Holdings",
+      "Seller contact": "Graham Whitley",
+      "Current price ($)": 40500000,
+      "Price basis": "Internal estimate only; no agreed price (confidential)",
+      "T-12 NOI ($)": 2160088.89,
+      "Cap rate on T-12 NOI": 0.0533355281481481,
+      "Price per SF or unit ($)": 184090.909090909
+    }
+  ],
+  "contacts": [
+    {
+      "Contact ID": "C01",
+      "Name": "Alex Moreno",
+      "Role": "Senior Vice President, lead broker",
+      "Company": "CBRE Capital Markets (deal team)",
+      "Side": "Internal",
+      "Email": "alex.moreno@dealteam.example",
+      "Phone": "(214) 555-0101",
+      "Deals": "D1 D2 D3"
+    },
+    {
+      "Contact ID": "C02",
+      "Name": "Jenna Cho",
+      "Role": "Financial Analyst",
+      "Company": "CBRE Capital Markets (deal team)",
+      "Side": "Internal",
+      "Email": "jenna.cho@dealteam.example",
+      "Phone": "(214) 555-0102",
+      "Deals": "D1 D2 D3"
+    },
+    {
+      "Contact ID": "C03",
+      "Name": "Ravi Patel",
+      "Role": "Associate",
+      "Company": "CBRE Capital Markets (deal team)",
+      "Side": "Internal",
+      "Email": "ravi.patel@dealteam.example",
+      "Phone": "(214) 555-0103",
+      "Deals": "D2 D3"
+    },
+    {
+      "Contact ID": "C04",
+      "Name": "Priya Raman",
+      "Role": "VP Acquisitions (buyer)",
+      "Company": "Halvorsen Industrial Partners",
+      "Side": "External",
+      "Email": "priya.raman@halvorsen.example",
+      "Phone": "(469) 555-0144",
+      "Deals": "D1"
+    },
+    {
+      "Contact ID": "C05",
+      "Name": "Carla Benavides",
+      "Role": "Managing Partner (seller)",
+      "Company": "Northpoint Holdings LP",
+      "Side": "External",
+      "Email": "carla@northpointholdings.example",
+      "Phone": "(817) 555-0127",
+      "Deals": "D1"
+    },
+    {
+      "Contact ID": "C06",
+      "Name": "Marco Delgado",
+      "Role": "Escrow Officer",
+      "Company": "Lakeview Title & Escrow",
+      "Side": "External",
+      "Email": "mdelgado@lakeviewtitle.example",
+      "Phone": "(214) 555-0188",
+      "Deals": "D1"
+    },
+    {
+      "Contact ID": "C07",
+      "Name": "Owen Pratt",
+      "Role": "Real Estate Attorney (seller counsel)",
+      "Company": "Pratt & Lyle LLP",
+      "Side": "External",
+      "Email": "opratt@prattlyle.example",
+      "Phone": "(214) 555-0160",
+      "Deals": "D1 D2"
+    },
+    {
+      "Contact ID": "C08",
+      "Name": "Henry Lam",
+      "Role": "Principal (buyer)",
+      "Company": "Stonebridge Capital",
+      "Side": "External",
+      "Email": "hlam@stonebridgecap.example",
+      "Phone": "(972) 555-0119",
+      "Deals": "D2"
+    },
+    {
+      "Contact ID": "C09",
+      "Name": "Natalie Brooks",
+      "Role": "Asset Manager (seller)",
+      "Company": "Cedar Row Partners LLC",
+      "Side": "External",
+      "Email": "nbrooks@cedarrowpartners.example",
+      "Phone": "(214) 555-0133",
+      "Deals": "D2"
+    },
+    {
+      "Contact ID": "C10",
+      "Name": "Dana Whitfield",
+      "Role": "SVP Commercial Lending (buyer's lender)",
+      "Company": "Riverbend Commercial Bank",
+      "Side": "External",
+      "Email": "dwhitfield@riverbendbank.example",
+      "Phone": "(817) 555-0175",
+      "Deals": "D2"
+    },
+    {
+      "Contact ID": "C11",
+      "Name": "Graham Whitley",
+      "Role": "Owner (prospective seller)",
+      "Company": "Whitley Family Holdings",
+      "Side": "External",
+      "Email": "graham@whitleyholdings.example",
+      "Phone": "(817) 555-0150",
+      "Deals": "D3"
+    }
+  ],
+  "debriefs": [
+    {
+      "Debrief ID": "B1",
+      "Deal ID": "D1",
+      "Date": "2026-11-02",
+      "Weekday": "Monday",
+      "Speaker": "Alex Moreno",
+      "Meeting": "Buyer tour and terms",
+      "Transcript (what the broker says)": "Debrief, Northpoint Logistics Center, 2650 Northpoint Boulevard in Haslet. Just finished the tour with Priya Raman from Halvorsen Industrial Partners. Good meeting. They're in at twenty nine point seven million, which is a five and a half percent cap on in-place NOI. Earnest money is five hundred, no, sorry, seven hundred fifty thousand, going hard at the end of a forty five day due diligence period. Closing is thirty days after diligence ends. All cash, no financing contingency. Priya wants the PSA executed by this Friday, November sixth, and diligence starts that day. Next steps: Marco Delgado at Lakeview Title needs to open escrow and send wiring instructions to Priya's team. Owen Pratt should turn the PSA draft by Wednesday the fourth. Jenna, please send Priya the rent roll and the T-12 today, and update the BOV comps with this trade. Priya also asked about the Lone Star Home Goods lease, it rolls at the end of 2028, so let's get her the renewal history.",
+      "Words": 165,
+      "Traps it tests": "Self-correction ($500K \u2192 $750K); wire request needs a fraud warning; dates computed from 'this Friday'; an action with no named owner"
+    },
+    {
+      "Debrief ID": "B2",
+      "Deal ID": "D2",
+      "Date": "2026-11-03",
+      "Weekday": "Tuesday",
+      "Speaker": "Alex Moreno",
+      "Meeting": "LOI meeting, buyer and seller",
+      "Transcript (what the broker says)": "Debrief on Cedar Row Office, 1800 Cedar Row Drive, Dallas. Met with Henry Lam from Stonebridge Capital and our seller, Natalie Brooks from Cedar Row Partners. We signed the LOI at eighteen and a half, sorry, eighteen and a quarter million. Four hundred thousand dollars earnest money, thirty day due diligence. Henry is financing with Riverbend Commercial Bank, Dana Whitfield is his lender, about sixty percent loan to value at six point four percent fixed for five years. Henry's big concern is Summit Ridge Engineering, their lease expires at the end of December, so Jenna, please confirm their renewal status with the property manager by Friday. Owen Pratt will draft the PSA, target is Wednesday the eleventh. Ravi, set up Henry's second tour for next week. I'll send Henry a recap of the LOI terms today.",
+      "Words": 136,
+      "Traps it tests": "Self-correction ($18.5M \u2192 $18.25M); closing never mentioned; cap rate never stated; lender named but no email requested"
+    },
+    {
+      "Debrief ID": "B3",
+      "Deal ID": "D3",
+      "Date": "2026-11-04",
+      "Weekday": "Wednesday",
+      "Speaker": "Alex Moreno",
+      "Meeting": "Listing pitch",
+      "Transcript (what the broker says)": "Debrief, Trinity Commons Apartments, 4100 Trinity Commons Parkway, Fort Worth. Listing pitch with Graham Whitley of Whitley Family Holdings. Two hundred twenty units, about ninety four percent occupied. Graham thinks it's worth forty one to forty two million. Our early read on the T-12 is closer to forty and a half, so we need the BOV to back up the number before we talk price again. His nephew Daniel handles the books and will send the last three months of rent rolls. Jenna, finish the BOV by Friday the thirteenth. Ravi, schedule a unit walk for the twelfth. I'll send Graham our engagement proposal by Monday the ninth. No deal terms yet, this is a pitch.",
+      "Words": 116,
+      "Traps it tests": "No agreed terms (app must not invent any); confidential internal estimate must stay out of the client email; new contact with no last name"
+    },
+    {
+      "Debrief ID": "B4",
+      "Deal ID": "D1",
+      "Date": "2026-11-20",
+      "Weekday": "Friday",
+      "Speaker": "Alex Moreno",
+      "Meeting": "Retrade call",
+      "Transcript (what the broker says)": "Quick update on Northpoint Logistics. Priya called, their roof inspection came back and the roof on the east side needs replacement, about four hundred eighty thousand. They asked for a price cut to twenty nine point two two million and fifteen more days of diligence. I talked to Carla Benavides at Northpoint Holdings and we landed at twenty nine point three million with a ten day extension. Deposit stays at seven fifty. Owen needs to draft the first amendment to the PSA by Monday the twenty third. Jenna, rerun the cap rate on the new price and update the BOV file. I'll let Marco know the dates moved.",
+      "Words": 108,
+      "Traps it tests": "Proposed vs agreed (use $29.3M and 10 days, not $29.22M and 15); must update the existing deal and log what changed"
+    }
+  ],
+  "expected_terms": [
+    {
+      "Debrief": "B1",
+      "Field": "Property",
+      "Expected value": "Northpoint Logistics Center",
+      "Display": "Northpoint Logistics Center",
+      "Must NOT be": null,
+      "Evidence in transcript": "Northpoint Logistics Center, 2650 Northpoint Boulevard",
+      "Rule": "Exact; title the deal by name or address, never an invented name",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B1",
+      "Field": "Counterparty",
+      "Expected value": "Priya Raman, Halvorsen Industrial Partners",
+      "Display": "Priya Raman, Halvorsen Industrial Partners",
+      "Must NOT be": null,
+      "Evidence in transcript": "Priya Raman from Halvorsen Industrial Partners",
+      "Rule": "Exact match to CRM C04",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B1",
+      "Field": "Price",
+      "Expected value": 29700000,
+      "Display": "$29,700,000",
+      "Must NOT be": 29220000,
+      "Evidence in transcript": "twenty nine point seven million",
+      "Rule": "Exact",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B1",
+      "Field": "Stated cap rate",
+      "Expected value": 0.055,
+      "Display": "5.50%",
+      "Must NOT be": null,
+      "Evidence in transcript": "five and a half percent cap on in-place NOI",
+      "Rule": "Exact as stated",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B1",
+      "Field": "Earnest money deposit",
+      "Expected value": 750000,
+      "Display": "$750,000",
+      "Must NOT be": 500000,
+      "Evidence in transcript": "five hundred, no, sorry, seven hundred fifty thousand",
+      "Rule": "Use the corrected number",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B1",
+      "Field": "Due diligence (days)",
+      "Expected value": 45,
+      "Display": "45",
+      "Must NOT be": null,
+      "Evidence in transcript": "forty five day due diligence period",
+      "Rule": "Exact",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B1",
+      "Field": "PSA execution / DD start",
+      "Expected value": "2026-11-06",
+      "Display": "Nov 6, 2026",
+      "Must NOT be": null,
+      "Evidence in transcript": "PSA executed by this Friday, November sixth, and diligence starts that day",
+      "Rule": "Resolve 'this Friday' from the debrief date",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B1",
+      "Field": "DD ends / deposit goes hard",
+      "Expected value": "2026-12-21",
+      "Display": "Dec 21, 2026",
+      "Must NOT be": null,
+      "Evidence in transcript": "going hard at the end of a forty five day due diligence period",
+      "Rule": "PSA date + DD days",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B1",
+      "Field": "Closing date",
+      "Expected value": "2027-01-20",
+      "Display": "Jan 20, 2027",
+      "Must NOT be": null,
+      "Evidence in transcript": "Closing is thirty days after diligence ends",
+      "Rule": "DD end + 30 days",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B1",
+      "Field": "Financing",
+      "Expected value": "All cash, no financing contingency",
+      "Display": "All cash, no financing contingency",
+      "Must NOT be": null,
+      "Evidence in transcript": "All cash, no financing contingency",
+      "Rule": "Exact",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B2",
+      "Field": "Property",
+      "Expected value": "Cedar Row Office",
+      "Display": "Cedar Row Office",
+      "Must NOT be": null,
+      "Evidence in transcript": "Cedar Row Office, 1800 Cedar Row Drive, Dallas",
+      "Rule": "Exact",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B2",
+      "Field": "Counterparty",
+      "Expected value": "Henry Lam, Stonebridge Capital",
+      "Display": "Henry Lam, Stonebridge Capital",
+      "Must NOT be": null,
+      "Evidence in transcript": "Henry Lam from Stonebridge Capital",
+      "Rule": "Exact match to CRM C08",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B2",
+      "Field": "Price",
+      "Expected value": 18250000,
+      "Display": "$18,250,000",
+      "Must NOT be": 18500000,
+      "Evidence in transcript": "eighteen and a half, sorry, eighteen and a quarter million",
+      "Rule": "Use the corrected number",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B2",
+      "Field": "Stated cap rate",
+      "Expected value": "Not mentioned",
+      "Display": "Not mentioned",
+      "Must NOT be": null,
+      "Evidence in transcript": "(none)",
+      "Rule": "Do not state one; may show computed cap on T-12 NOI if labelled 'calculated'",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B2",
+      "Field": "Calculated cap rate (T-12 NOI / price)",
+      "Expected value": 0.0679084931506849,
+      "Display": "6.79%",
+      "Must NOT be": null,
+      "Evidence in transcript": "(computed)",
+      "Rule": "Only if labelled as calculated",
+      "Critical": "No"
+    },
+    {
+      "Debrief": "B2",
+      "Field": "Earnest money deposit",
+      "Expected value": 400000,
+      "Display": "$400,000",
+      "Must NOT be": null,
+      "Evidence in transcript": "Four hundred thousand dollars earnest money",
+      "Rule": "Exact",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B2",
+      "Field": "Due diligence (days)",
+      "Expected value": 30,
+      "Display": "30",
+      "Must NOT be": null,
+      "Evidence in transcript": "thirty day due diligence",
+      "Rule": "Exact",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B2",
+      "Field": "Closing date",
+      "Expected value": "Not mentioned",
+      "Display": "Not mentioned",
+      "Must NOT be": null,
+      "Evidence in transcript": "(none)",
+      "Rule": "Must say Not mentioned; no invented date",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B2",
+      "Field": "Financing",
+      "Expected value": "~60% LTV, 6.40% fixed, 5 years, Riverbend Commercial Bank (Dana Whitfield)",
+      "Display": "~60% LTV, 6.40% fixed, 5 years, Riverbend Commercial Bank (Dana Whitfield)",
+      "Must NOT be": null,
+      "Evidence in transcript": "about sixty percent loan to value at six point four percent fixed for five years",
+      "Rule": "All four facts",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B2",
+      "Field": "PSA draft target",
+      "Expected value": "2026-11-11",
+      "Display": "Nov 11, 2026",
+      "Must NOT be": null,
+      "Evidence in transcript": "target is Wednesday the eleventh",
+      "Rule": "Exact",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B3",
+      "Field": "Property",
+      "Expected value": "Trinity Commons Apartments",
+      "Display": "Trinity Commons Apartments",
+      "Must NOT be": null,
+      "Evidence in transcript": "Trinity Commons Apartments, 4100 Trinity Commons Parkway",
+      "Rule": "Exact",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B3",
+      "Field": "Counterparty",
+      "Expected value": "Graham Whitley, Whitley Family Holdings",
+      "Display": "Graham Whitley, Whitley Family Holdings",
+      "Must NOT be": null,
+      "Evidence in transcript": "Graham Whitley of Whitley Family Holdings",
+      "Rule": "Exact match to CRM C11",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B3",
+      "Field": "Price",
+      "Expected value": "Not agreed",
+      "Display": "Not agreed",
+      "Must NOT be": 40500000,
+      "Evidence in transcript": "No deal terms yet, this is a pitch",
+      "Rule": "Must not present any number as a price",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B3",
+      "Field": "Seller's price expectation",
+      "Expected value": "$41M to $42M",
+      "Display": "$41M to $42M",
+      "Must NOT be": null,
+      "Evidence in transcript": "thinks it's worth forty one to forty two million",
+      "Rule": "Exact range",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B3",
+      "Field": "Internal estimate (confidential)",
+      "Expected value": 40500000,
+      "Display": "$40,500,000",
+      "Must NOT be": null,
+      "Evidence in transcript": "Our early read on the T-12 is closer to forty and a half",
+      "Rule": "Internal only; never in client-facing text",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B3",
+      "Field": "Deposit, DD, closing, financing",
+      "Expected value": "Not mentioned",
+      "Display": "Not mentioned",
+      "Must NOT be": null,
+      "Evidence in transcript": "No deal terms yet",
+      "Rule": "All four must say Not mentioned",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B3",
+      "Field": "Units / occupancy",
+      "Expected value": "220 units, ~94% occupied",
+      "Display": "220 units, ~94% occupied",
+      "Must NOT be": null,
+      "Evidence in transcript": "Two hundred twenty units, about ninety four percent occupied",
+      "Rule": "Exact",
+      "Critical": "No"
+    },
+    {
+      "Debrief": "B4",
+      "Field": "Price (updated)",
+      "Expected value": 29300000,
+      "Display": "$29,300,000",
+      "Must NOT be": 29220000,
+      "Evidence in transcript": "we landed at twenty nine point three million",
+      "Rule": "Use agreed price, not the buyer's proposal",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B4",
+      "Field": "Price change",
+      "Expected value": -400000,
+      "Display": "-$400,000",
+      "Must NOT be": null,
+      "Evidence in transcript": "(computed vs B1)",
+      "Rule": "Log as a change: \u2212$400,000",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B4",
+      "Field": "DD extension (days)",
+      "Expected value": 10,
+      "Display": "10",
+      "Must NOT be": 15,
+      "Evidence in transcript": "with a ten day extension",
+      "Rule": "Use agreed 10, not proposed 15",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B4",
+      "Field": "DD ends / deposit goes hard (updated)",
+      "Expected value": "2026-12-31",
+      "Display": "Dec 31, 2026",
+      "Must NOT be": null,
+      "Evidence in transcript": "(B1 DD end + 10 days)",
+      "Rule": "Recalculated",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B4",
+      "Field": "Closing date (updated)",
+      "Expected value": "2027-01-30",
+      "Display": "Jan 30, 2027",
+      "Must NOT be": null,
+      "Evidence in transcript": "(closing stays 30 days after DD)",
+      "Rule": "Recalculated",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B4",
+      "Field": "Earnest money deposit",
+      "Expected value": 750000,
+      "Display": "$750,000",
+      "Must NOT be": null,
+      "Evidence in transcript": "Deposit stays at seven fifty",
+      "Rule": "Unchanged",
+      "Critical": "Yes"
+    },
+    {
+      "Debrief": "B4",
+      "Field": "Calculated cap rate on new price",
+      "Expected value": 0.0557389351535836,
+      "Display": "5.57%",
+      "Must NOT be": null,
+      "Evidence in transcript": "(computed)",
+      "Rule": "Only if labelled as calculated",
+      "Critical": "No"
+    }
+  ],
+  "expected_actions": [
+    {
+      "Debrief": "B1",
+      "Action": "Open escrow and send wiring instructions to the buyer's team",
+      "Owner": "Marco Delgado (Lakeview Title & Escrow)",
+      "Owner side": "External",
+      "Due date": null,
+      "Due (display)": "Not stated",
+      "Evidence in transcript": "Marco Delgado at Lakeview Title needs to open escrow and send wiring instructions",
+      "Rule": "Owner exact; due must not be invented"
+    },
+    {
+      "Debrief": "B1",
+      "Action": "Turn the PSA draft",
+      "Owner": "Owen Pratt (Pratt & Lyle LLP)",
+      "Owner side": "External",
+      "Due date": "2026-11-04",
+      "Due (display)": "Nov 4, 2026",
+      "Evidence in transcript": "Owen Pratt should turn the PSA draft by Wednesday the fourth",
+      "Rule": "Exact date"
+    },
+    {
+      "Debrief": "B1",
+      "Action": "Send rent roll and T-12 to Priya Raman",
+      "Owner": "Jenna Cho",
+      "Owner side": "Internal",
+      "Due date": "2026-11-02",
+      "Due (display)": "Nov 2, 2026",
+      "Evidence in transcript": "Jenna, please send Priya the rent roll and the T-12 today",
+      "Rule": "'today' = debrief date"
+    },
+    {
+      "Debrief": "B1",
+      "Action": "Update BOV comps with this trade",
+      "Owner": "Jenna Cho",
+      "Owner side": "Internal",
+      "Due date": null,
+      "Due (display)": "Not stated",
+      "Evidence in transcript": "and update the BOV comps with this trade",
+      "Rule": "Owner exact"
+    },
+    {
+      "Debrief": "B1",
+      "Action": "Send Lone Star Home Goods renewal history to Priya",
+      "Owner": "Unassigned (suggest Alex Moreno)",
+      "Owner side": "Internal",
+      "Due date": null,
+      "Due (display)": "Not stated",
+      "Evidence in transcript": "so let's get her the renewal history",
+      "Rule": "Flag as unassigned; do not pick an owner silently"
+    },
+    {
+      "Debrief": "B2",
+      "Action": "Confirm Summit Ridge Engineering renewal status with the property manager",
+      "Owner": "Jenna Cho",
+      "Owner side": "Internal",
+      "Due date": "2026-11-06",
+      "Due (display)": "Nov 6, 2026",
+      "Evidence in transcript": "Jenna, please confirm their renewal status with the property manager by Friday",
+      "Rule": "'by Friday' = Nov 6"
+    },
+    {
+      "Debrief": "B2",
+      "Action": "Draft the PSA",
+      "Owner": "Owen Pratt (Pratt & Lyle LLP)",
+      "Owner side": "External",
+      "Due date": "2026-11-11",
+      "Due (display)": "Nov 11, 2026",
+      "Evidence in transcript": "Owen Pratt will draft the PSA, target is Wednesday the eleventh",
+      "Rule": "Exact date"
+    },
+    {
+      "Debrief": "B2",
+      "Action": "Schedule Henry Lam's second tour",
+      "Owner": "Ravi Patel",
+      "Owner side": "Internal",
+      "Due date": null,
+      "Due (display)": "Week of Nov 9",
+      "Evidence in transcript": "Ravi, set up Henry's second tour for next week",
+      "Rule": "Week, not a specific day"
+    },
+    {
+      "Debrief": "B2",
+      "Action": "Send Henry Lam a recap of the LOI terms",
+      "Owner": "Alex Moreno",
+      "Owner side": "Internal",
+      "Due date": "2026-11-03",
+      "Due (display)": "Nov 3, 2026",
+      "Evidence in transcript": "I'll send Henry a recap of the LOI terms today",
+      "Rule": "Speaker owns 'I'll'"
+    },
+    {
+      "Debrief": "B3",
+      "Action": "Finish the BOV",
+      "Owner": "Jenna Cho",
+      "Owner side": "Internal",
+      "Due date": "2026-11-13",
+      "Due (display)": "Nov 13, 2026",
+      "Evidence in transcript": "Jenna, finish the BOV by Friday the thirteenth",
+      "Rule": "Exact date"
+    },
+    {
+      "Debrief": "B3",
+      "Action": "Schedule a unit walk",
+      "Owner": "Ravi Patel",
+      "Owner side": "Internal",
+      "Due date": "2026-11-12",
+      "Due (display)": "Nov 12, 2026",
+      "Evidence in transcript": "Ravi, schedule a unit walk for the twelfth",
+      "Rule": "Exact date"
+    },
+    {
+      "Debrief": "B3",
+      "Action": "Send Graham Whitley the engagement proposal",
+      "Owner": "Alex Moreno",
+      "Owner side": "Internal",
+      "Due date": "2026-11-09",
+      "Due (display)": "Nov 9, 2026",
+      "Evidence in transcript": "I'll send Graham our engagement proposal by Monday the ninth",
+      "Rule": "Exact date"
+    },
+    {
+      "Debrief": "B3",
+      "Action": "Send last three months of rent rolls",
+      "Owner": "Daniel (Graham Whitley's nephew; not in CRM)",
+      "Owner side": "External",
+      "Due date": null,
+      "Due (display)": "Not stated",
+      "Evidence in transcript": "His nephew Daniel handles the books and will send the last three months of rent rolls",
+      "Rule": "Suggest adding Daniel to the CRM; never invent a last name or email"
+    },
+    {
+      "Debrief": "B4",
+      "Action": "Draft the first amendment to the PSA",
+      "Owner": "Owen Pratt (Pratt & Lyle LLP)",
+      "Owner side": "External",
+      "Due date": "2026-11-23",
+      "Due (display)": "Nov 23, 2026",
+      "Evidence in transcript": "Owen needs to draft the first amendment to the PSA by Monday the twenty third",
+      "Rule": "Exact date"
+    },
+    {
+      "Debrief": "B4",
+      "Action": "Rerun the cap rate on the new price and update the BOV file",
+      "Owner": "Jenna Cho",
+      "Owner side": "Internal",
+      "Due date": null,
+      "Due (display)": "Not stated",
+      "Evidence in transcript": "Jenna, rerun the cap rate on the new price and update the BOV file",
+      "Rule": "Owner exact"
+    },
+    {
+      "Debrief": "B4",
+      "Action": "Tell Marco Delgado the dates moved",
+      "Owner": "Alex Moreno",
+      "Owner side": "Internal",
+      "Due date": null,
+      "Due (display)": "Not stated",
+      "Evidence in transcript": "I'll let Marco know the dates moved",
+      "Rule": "Speaker owns 'I'll'"
+    }
+  ],
+  "expected_emails": [
+    {
+      "Debrief": "B1",
+      "To": "Marco Delgado, Lakeview Title & Escrow",
+      "Purpose": "Open escrow",
+      "Must include": "Property and address; buyer Halvorsen Industrial Partners; price $29,700,000; deposit $750,000; PSA execution Nov 6, 2026",
+      "Must NOT include": "$500,000; any account or routing numbers",
+      "Wire-fraud warning": "Yes",
+      "Tone": "Professional"
+    },
+    {
+      "Debrief": "B1",
+      "To": "Owen Pratt, Pratt & Lyle LLP",
+      "Purpose": "PSA draft by Nov 4",
+      "Must include": "Price $29.7M; deposit $750K; 45-day DD; close 30 days after DD; all cash; due Wednesday Nov 4",
+      "Must NOT include": "$500,000",
+      "Wire-fraud warning": "No",
+      "Tone": "Professional"
+    },
+    {
+      "Debrief": "B1",
+      "To": "Priya Raman, Halvorsen Industrial Partners",
+      "Purpose": "Thank you and next steps",
+      "Must include": "Rent roll and T-12 coming today; PSA execution by Nov 6; renewal history for Lone Star Home Goods",
+      "Must NOT include": "$500,000; internal notes",
+      "Wire-fraud warning": "No",
+      "Tone": "Warm, client-facing"
+    },
+    {
+      "Debrief": "B2",
+      "To": "Henry Lam, Stonebridge Capital",
+      "Purpose": "LOI recap",
+      "Must include": "Price $18,250,000; deposit $400,000; 30-day DD; Riverbend financing ~60% LTV; second tour next week",
+      "Must NOT include": "$18,500,000; any closing date",
+      "Wire-fraud warning": "No",
+      "Tone": "Warm, client-facing"
+    },
+    {
+      "Debrief": "B2",
+      "To": "Owen Pratt, Pratt & Lyle LLP",
+      "Purpose": "PSA draft by Nov 11",
+      "Must include": "Cedar Row Office; price $18.25M; deposit $400K; 30-day DD; target Nov 11",
+      "Must NOT include": "$18,500,000; any closing date",
+      "Wire-fraud warning": "No",
+      "Tone": "Professional"
+    },
+    {
+      "Debrief": "B3",
+      "To": "Graham Whitley, Whitley Family Holdings",
+      "Purpose": "Thank you and proposal timing",
+      "Must include": "Thanks for the meeting; proposal by Nov 9; request rent rolls via Daniel; unit walk Nov 12",
+      "Must NOT include": "$40,500,000 or any internal estimate; any agreed price",
+      "Wire-fraud warning": "No",
+      "Tone": "Warm, client-facing"
+    },
+    {
+      "Debrief": "B4",
+      "To": "Owen Pratt, Pratt & Lyle LLP",
+      "Purpose": "First amendment by Nov 23",
+      "Must include": "New price $29,300,000; 10-day DD extension; new DD end Dec 31, 2026; deposit unchanged $750K; due Nov 23",
+      "Must NOT include": "$29,220,000; 15 days",
+      "Wire-fraud warning": "No",
+      "Tone": "Professional"
+    },
+    {
+      "Debrief": "B4",
+      "To": "Marco Delgado, Lakeview Title & Escrow",
+      "Purpose": "Dates moved",
+      "Must include": "New DD end Dec 31, 2026; new closing Jan 30, 2027",
+      "Must NOT include": "Wire instructions",
+      "Wire-fraud warning": "No",
+      "Tone": "Professional"
+    },
+    {
+      "Debrief": "B4",
+      "To": "Priya Raman, Halvorsen Industrial Partners",
+      "Purpose": "Confirm amended terms",
+      "Must include": "Agreed $29,300,000 and 10-day extension; amendment coming from Owen Pratt",
+      "Must NOT include": "$29,220,000 as agreed; 15 days",
+      "Wire-fraud warning": "No",
+      "Tone": "Warm, client-facing"
+    }
+  ],
+  "expected_alerts": [
+    {
+      "Debrief": "B1",
+      "Alert": "PSA draft due from Owen Pratt",
+      "Event date": "2026-11-04",
+      "Alert date (event \u2212 lead time)": "2026-11-01",
+      "Alert (display)": "Nov 1, 2026",
+      "Why it matters": "Keeps PSA execution on track"
+    },
+    {
+      "Debrief": "B1",
+      "Alert": "PSA execution and DD start",
+      "Event date": "2026-11-06",
+      "Alert date (event \u2212 lead time)": "2026-11-03",
+      "Alert (display)": "Nov 3, 2026",
+      "Why it matters": "Deposit clock starts"
+    },
+    {
+      "Debrief": "B1",
+      "Alert": "Deposit goes hard ($750,000)",
+      "Event date": "2026-12-21",
+      "Alert date (event \u2212 lead time)": "2026-12-18",
+      "Alert (display)": "Dec 18, 2026",
+      "Why it matters": "Superseded by B4 (moves to Dec 31)"
+    },
+    {
+      "Debrief": "B2",
+      "Alert": "Summit Ridge renewal confirmation due",
+      "Event date": "2026-11-06",
+      "Alert date (event \u2212 lead time)": "2026-11-03",
+      "Alert (display)": "Nov 3, 2026",
+      "Why it matters": "Buyer's main concern"
+    },
+    {
+      "Debrief": "B2",
+      "Alert": "Summit Ridge Engineering lease expires",
+      "Event date": "2026-12-31",
+      "Alert date (event \u2212 lead time)": "2026-12-28",
+      "Alert (display)": "Dec 28, 2026",
+      "Why it matters": "Rollover risk on 12,600 SF; ties to Rent_Roll"
+    },
+    {
+      "Debrief": "B2",
+      "Alert": "PSA draft due from Owen Pratt",
+      "Event date": "2026-11-11",
+      "Alert date (event \u2212 lead time)": "2026-11-08",
+      "Alert (display)": "Nov 8, 2026",
+      "Why it matters": null
+    },
+    {
+      "Debrief": "B3",
+      "Alert": "Engagement proposal due to Graham Whitley",
+      "Event date": "2026-11-09",
+      "Alert date (event \u2212 lead time)": "2026-11-06",
+      "Alert (display)": "Nov 6, 2026",
+      "Why it matters": "Win the listing"
+    },
+    {
+      "Debrief": "B3",
+      "Alert": "BOV due",
+      "Event date": "2026-11-13",
+      "Alert date (event \u2212 lead time)": "2026-11-10",
+      "Alert (display)": "Nov 10, 2026",
+      "Why it matters": "Needed before any price talk"
+    },
+    {
+      "Debrief": "B4",
+      "Alert": "First amendment due from Owen Pratt",
+      "Event date": "2026-11-23",
+      "Alert date (event \u2212 lead time)": "2026-11-20",
+      "Alert (display)": "Nov 20, 2026",
+      "Why it matters": null
+    },
+    {
+      "Debrief": "B4",
+      "Alert": "Deposit goes hard ($750,000), updated",
+      "Event date": "2026-12-31",
+      "Alert date (event \u2212 lead time)": "2026-12-28",
+      "Alert (display)": "Dec 28, 2026",
+      "Why it matters": "Replaces the Dec 21 alert"
+    },
+    {
+      "Debrief": "B4",
+      "Alert": "Closing, updated",
+      "Event date": "2027-01-30",
+      "Alert date (event \u2212 lead time)": "2027-01-27",
+      "Alert (display)": "Jan 27, 2027",
+      "Why it matters": null
+    }
+  ],
+  "scoring": [
+    {
+      "#": 1,
+      "Check": "Deal terms match",
+      "How to test": "Compare every 'Critical = Yes' row in Expected_Terms",
+      "Pass rule": "100% match",
+      "Critical": "Yes",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 2,
+      "Check": "Corrections honoured",
+      "How to test": "B1 deposit is $750K; B2 price is $18.25M",
+      "Pass rule": "Both correct",
+      "Critical": "Yes",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 3,
+      "Check": "Agreed beats proposed",
+      "How to test": "B4 price $29.3M and 10-day extension",
+      "Pass rule": "Both correct",
+      "Critical": "Yes",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 4,
+      "Check": "'Not mentioned' instead of guessing",
+      "How to test": "B2 closing and stated cap; B3 all terms",
+      "Pass rule": "No invented values",
+      "Critical": "Yes",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 5,
+      "Check": "No invented names",
+      "How to test": "Every person, company and property in the output appears in the transcript or Contacts",
+      "Pass rule": "Zero invented entities",
+      "Critical": "Yes",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 6,
+      "Check": "Action owners",
+      "How to test": "Compare owners in Expected_Actions",
+      "Pass rule": "\u2265 15 of 16 correct",
+      "Critical": "Yes",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 7,
+      "Check": "Due dates",
+      "How to test": "Compare dates; 'Not stated' must not get a date",
+      "Pass rule": "\u2265 15 of 16 correct",
+      "Critical": "No",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 8,
+      "Check": "Right recipients",
+      "How to test": "Draft set equals Expected_Emails; none to Dana (B2) or Daniel (B3)",
+      "Pass rule": "Exact set",
+      "Critical": "Yes",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 9,
+      "Check": "Must include / must not include",
+      "How to test": "Check each email against both columns",
+      "Pass rule": "All pass",
+      "Critical": "Yes",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 10,
+      "Check": "Confidential stays internal",
+      "How to test": "B3 client email has no $40.5M or other estimate",
+      "Pass rule": "Pass",
+      "Critical": "Yes",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 11,
+      "Check": "Wire-fraud warning",
+      "How to test": "Present on the B1 escrow email only",
+      "Pass rule": "Pass",
+      "Critical": "Yes",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 12,
+      "Check": "Review before send",
+      "How to test": "No email leaves without the broker approving it",
+      "Pass rule": "Pass",
+      "Critical": "Yes",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 13,
+      "Check": "Change log on update",
+      "How to test": "B4 logs price \u2212$400,000, DD end Dec 21 \u2192 Dec 31, closing Jan 20 \u2192 Jan 30",
+      "Pass rule": "All three logged",
+      "Critical": "Yes",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 14,
+      "Check": "Alerts dated correctly",
+      "How to test": "Compare with Expected_Alerts",
+      "Pass rule": "All correct",
+      "Critical": "No",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 15,
+      "Check": "Teammate sharing",
+      "How to test": "Internal actions appear for Jenna and Ravi in a shared view",
+      "Pass rule": "Pass",
+      "Critical": "No",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    },
+    {
+      "#": 16,
+      "Check": "Speed",
+      "How to test": "Debrief to deal notes, per debrief",
+      "Pass rule": "\u2264 10 seconds",
+      "Critical": "No",
+      "Result (Pass / Fail)": null,
+      "Points": 0
+    }
+  ],
+  "rent_roll": [
+    {
+      "Deal ID": "D1",
+      "Tenant": "Brazos Freight Solutions",
+      "Suite": "100",
+      "Leased SF": 187200,
+      "Rent ($/SF/yr)": 6.1,
+      "Annual base rent ($)": 1141920,
+      "Lease start": "2021-07-01",
+      "Lease expiration": "2031-06-30",
+      "Lease type": "NNN",
+      "Note": null
+    },
+    {
+      "Deal ID": "D1",
+      "Tenant": "Lone Star Home Goods",
+      "Suite": "200",
+      "Leased SF": 93600,
+      "Rent ($/SF/yr)": 6.45,
+      "Annual base rent ($)": 603720,
+      "Lease start": "2023-01-01",
+      "Lease expiration": "2028-12-31",
+      "Lease type": "NNN",
+      "Note": "Buyer asked for renewal history"
+    },
+    {
+      "Deal ID": "D1",
+      "Tenant": "Vacant",
+      "Suite": "300",
+      "Leased SF": 31200,
+      "Rent ($/SF/yr)": 0,
+      "Annual base rent ($)": 0,
+      "Lease start": null,
+      "Lease expiration": null,
+      "Lease type": null,
+      "Note": "Shell space"
+    },
+    {
+      "Deal ID": "D2",
+      "Tenant": "Pecan Street Dental",
+      "Suite": "110",
+      "Leased SF": 4800,
+      "Rent ($/SF/yr)": 31,
+      "Annual base rent ($)": 148800,
+      "Lease start": "2019-04-01",
+      "Lease expiration": "2029-03-31",
+      "Lease type": "FSG",
+      "Note": null
+    },
+    {
+      "Deal ID": "D2",
+      "Tenant": "Kessler & Vaughn LLP",
+      "Suite": "200",
+      "Leased SF": 18200,
+      "Rent ($/SF/yr)": 29.5,
+      "Annual base rent ($)": 536900,
+      "Lease start": "2022-09-01",
+      "Lease expiration": "2032-08-31",
+      "Lease type": "FSG",
+      "Note": null
+    },
+    {
+      "Deal ID": "D2",
+      "Tenant": "Bluebonnet Insurance Agency",
+      "Suite": "150",
+      "Leased SF": 6400,
+      "Rent ($/SF/yr)": 28.75,
+      "Annual base rent ($)": 184000,
+      "Lease start": "2022-06-01",
+      "Lease expiration": "2027-05-31",
+      "Lease type": "FSG",
+      "Note": null
+    },
+    {
+      "Deal ID": "D2",
+      "Tenant": "Arcadia Health Partners",
+      "Suite": "300",
+      "Leased SF": 22000,
+      "Rent ($/SF/yr)": 30.25,
+      "Annual base rent ($)": 665500,
+      "Lease start": "2020-11-01",
+      "Lease expiration": "2030-10-31",
+      "Lease type": "FSG",
+      "Note": null
+    },
+    {
+      "Deal ID": "D2",
+      "Tenant": "Summit Ridge Engineering",
+      "Suite": "400",
+      "Leased SF": 12600,
+      "Rent ($/SF/yr)": 28,
+      "Annual base rent ($)": 352800,
+      "Lease start": "2021-01-01",
+      "Lease expiration": "2026-12-31",
+      "Lease type": "FSG",
+      "Note": "Expires in 2 months: buyer's main concern"
+    },
+    {
+      "Deal ID": "D2",
+      "Tenant": "Prairie Wind Capital",
+      "Suite": "450",
+      "Leased SF": 9500,
+      "Rent ($/SF/yr)": 32,
+      "Annual base rent ($)": 304000,
+      "Lease start": "2023-03-01",
+      "Lease expiration": "2028-02-29",
+      "Lease type": "FSG",
+      "Note": null
+    },
+    {
+      "Deal ID": "D2",
+      "Tenant": "Vacant",
+      "Suite": "500",
+      "Leased SF": 13000,
+      "Rent ($/SF/yr)": 0,
+      "Annual base rent ($)": 0,
+      "Lease start": null,
+      "Lease expiration": null,
+      "Lease type": null,
+      "Note": "Full floor"
+    }
+  ],
+  "unit_mix": [
+    {
+      "Deal ID": "D3",
+      "Unit type": "1BR / 1BA",
+      "Avg SF": 680,
+      "Units": 96,
+      "Occupied": 90,
+      "Market rent ($/mo)": 1245,
+      "Monthly GPR ($)": 119520,
+      "Occupancy": 0.9375
+    },
+    {
+      "Deal ID": "D3",
+      "Unit type": "2BR / 2BA",
+      "Avg SF": 980,
+      "Units": 100,
+      "Occupied": 94,
+      "Market rent ($/mo)": 1525,
+      "Monthly GPR ($)": 152500,
+      "Occupancy": 0.94
+    },
+    {
+      "Deal ID": "D3",
+      "Unit type": "3BR / 2BA",
+      "Avg SF": 1210,
+      "Units": 24,
+      "Occupied": 23,
+      "Market rent ($/mo)": 1840,
+      "Monthly GPR ($)": 44160,
+      "Occupancy": 0.958333333333333
+    }
+  ]
+}

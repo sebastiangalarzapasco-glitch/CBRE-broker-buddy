@@ -1,0 +1,43 @@
+{% extends "base.html" %}{% block title %}Prep brief · {{ m.contact }}{% endblock %}
+{% block body %}
+<div class="hero">
+  <div><div class="eyebrow">Prep brief · {{ m.when }}</div><h1>{{ m.title }} with {{ m.contact }}</h1>
+    <p class="sub">{{ m.role }}, {{ m.company }} · {{ m.deal }}{% if m.location %} · {{ m.location }}{% endif %}</p></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+    <a class="btn sm" href="{{ url_for('deal', deal_id=m.deal_id) }}">Open deal</a>
+    <a class="btn sm primary" href="{{ url_for('meeting_debrief', mid=m.id) }}">Debrief this meeting</a>
+  </div>
+</div>
+<div class="grid g32">
+  <div class="grid" style="align-content:start">
+    <div class="card">
+      <h2>Talk about</h2>
+      {% for p in points %}<div class="point">{{ p }}</div>{% else %}<p class="small muted">Nothing outstanding with {{ m.contact.split()[0] }}. A good meeting to build the relationship.</p>{% endfor %}
+      {% if confidential %}<div class="conf" style="margin-top:12px">Internal only, do not share: estimate {{ confidential|join(', ') }}.</div>{% endif %}
+    </div>
+    <div class="card flush"><div class="hd"><h2 style="margin:0">Where the deal stands</h2><span class="small faint">From the deal record</span></div>
+      {% for t in snapshot %}<div class="term"><div class="k">{{ t.label }}</div><div class="v {{ 'nm' if t.status=='not_mentioned' }}">{{ t.value }}</div><div>{% if t.status=='calculated' %}<span class="chip">Calculated</span>{% elif t.status=='not_mentioned' %}<span class="chip amber">Not mentioned</span>{% endif %}</div></div>
+      {% else %}<div class="empty">No terms on record yet.</div>{% endfor %}
+    </div>
+    {% if changes %}<div class="card"><h2>Changed since you last spoke</h2>{% for c in changes %}<div class="small" style="padding:4px 0">{{ c.field|replace('_',' ')|capitalize }}: <s class="faint">{{ c.old }}</s> → <b>{{ c.new }}</b> <span class="faint">({{ fmt_date(c.date) }})</span></div>{% endfor %}</div>{% endif %}
+  </div>
+  <div class="grid" style="align-content:start">
+    <div class="card">
+      <h2>{{ m.contact.split()[0] }}</h2>
+      <div class="small"><b>{{ m.role }}</b>, {{ m.company }}</div>
+      <div class="small muted" style="margin-top:6px">{{ m.email }} · {{ m.phone }}</div>
+      <div class="small faint" style="margin-top:6px">{% if last %}Last mentioned in your {{ fmt_date(last.date) }} debrief.{% else %}Not mentioned in any debrief yet.{% endif %}</div>
+    </div>
+    <div class="card"><h2>Open items</h2>
+      <ul class="list">
+      {% for a in theirs %}<li class="small"><span class="chip blue">Owed by {{ m.contact.split()[0] }}</span><div style="flex:1">{{ a.description }}</div><span class="faint">{{ fmt_date(a.due_date) if a.due_date else a.due_text }}</span></li>{% endfor %}
+      {% for a in about_them %}<li class="small"><span class="chip green">For {{ m.contact.split()[0] }}</span><div style="flex:1">{{ a.description }} <span class="faint">({{ a.owner_label }})</span></div><span class="faint">{{ fmt_date(a.due_date) if a.due_date else a.due_text }}</span></li>{% endfor %}
+      {% for a in team[:4] %}<li class="small"><span class="chip">Team</span><div style="flex:1">{{ a.description }} <span class="faint">({{ a.owner_label }})</span></div><span class="faint">{{ fmt_date(a.due_date) if a.due_date else a.due_text }}</span></li>{% endfor %}
+      {% if not (theirs or about_them or team) %}<li class="small faint">No open items on this deal.</li>{% endif %}
+      </ul></div>
+    <div class="card"><h2>Coming up on this deal</h2>
+      {% for a in dates %}<div class="small" style="padding:4px 0"><b>{{ fmt_date(a.date) }}</b> · {{ a.label }}</div>{% else %}<p class="small faint" style="margin:0">No deal dates in the next 30 days.</p>{% endfor %}</div>
+    {% if emails %}<div class="card"><h2>Emails to {{ m.contact.split()[0] }}</h2>{% for e in emails %}<div class="small" style="padding:4px 0">{{ e.subject }} <span class="chip">{{ e.status }}</span></div>{% endfor %}<a class="small" href="{{ url_for('emails') }}">Review emails →</a></div>{% endif %}
+  </div>
+</div>
+{% endblock %}

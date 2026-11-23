@@ -1,0 +1,32 @@
+{% extends "base.html" %}{% block title %}Review emails{% endblock %}
+{% block body %}
+<div class="ph"><div><div class="eyebrow">Flawless communication</div><h1>Review before anything goes out</h1>
+<p class="sub">Every draft is checked against the deal record. Nothing is sent until a named person approves it.</p></div></div>
+{% for e in emails %}
+<div class="email" id="e{{ e.id }}">
+  <div class="top">
+    <div><b>{{ e.to_name }}</b> <span class="muted small">&lt;{{ e.to_email }}&gt; · {{ e.deal }} · {{ e.purpose }}</span></div>
+    <div style="display:flex;gap:6px">{% if e.wire %}<span class="chip red">Wire-related: verify by phone</span>{% endif %}
+      <span class="chip {{ 'green' if e.status=='Sent' else 'red' if e.status=='Failed' else 'blue' if e.status.startswith('Approved') else '' }}">{{ e.status }}{% if e.approved_by %} · {{ e.approved_by }}{% endif %}</span></div>
+  </div>
+  <div class="bd">
+    <form method="post" action="{{ url_for('email_save', eid=e.id) }}">
+      <label class="l">Subject</label><input type="text" name="subject" value="{{ e.subject }}" {{ 'readonly' if e.status!='Draft' }}>
+      <label class="l" style="margin-top:10px">Message</label><textarea name="body" {{ 'readonly' if e.status!='Draft' }}>{{ e.body }}</textarea>
+      {% if e.status=='Draft' %}<button class="btn sm" style="margin-top:8px">Save edits and recheck</button>{% endif %}
+    </form>
+    <div>
+      <label class="l">Checks</label>
+      {% for i in e.issues %}<div class="issue {{ i.level }}">{{ i.text }}</div>{% endfor %}
+      {% if not e.issues %}<div class="ok-note">Every number matches the deal record. No corrected, rejected or confidential figures.</div>{% endif %}
+      {% if e.status=='Draft' %}
+      <form method="post" action="{{ url_for('email_approve', eid=e.id) }}" style="margin-top:14px">
+        <label class="l">Approved by</label><input type="text" name="reviewer" placeholder="Your name" value="{{ speaker }}">
+        <button class="btn primary" style="margin-top:10px;width:100%;justify-content:center" {{ 'disabled' if e.blocked }}>Approve and send</button>
+        <div class="small faint" style="margin-top:8px">{{ 'Fix the red items first.' if e.blocked else 'Sends from your connected account. Without one, it is marked "Approved, not sent".' }}</div>
+      </form>{% endif %}
+    </div>
+  </div>
+</div>
+{% else %}<div class="card empty">No drafts yet. Process a debrief and its emails appear here.</div>{% endfor %}
+{% endblock %}

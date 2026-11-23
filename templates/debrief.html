@@ -1,0 +1,53 @@
+{% extends "base.html" %}{% block title %}New debrief{% endblock %}
+{% block body %}
+<div class="ph"><div><div class="eyebrow">Right after the meeting</div><h1>Talk, don't type</h1>
+<p class="sub">Say what happened. Broker Buddy finds the deal, the terms, who does what by when, and drafts the emails for your review.</p></div></div>
+
+<form method="post" id="f">
+<div class="grid g32">
+  <div class="card">
+    <div style="text-align:center">
+      <button type="button" class="rec" id="rec" aria-label="Start recording"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3Zm6-3a6 6 0 0 1-12 0m6 6v3"/></svg></button>
+      <div id="recstate" class="small muted">Tap to dictate (Chrome or Edge). Or type below.</div>
+    </div>
+    <label class="l" for="transcript" style="margin-top:16px">Debrief</label>
+    <textarea name="transcript" id="transcript" rows="9" placeholder="e.g. Debrief, Northpoint Logistics Center. Met Priya Raman from Halvorsen. They're in at twenty nine point seven million...">{{ text }}</textarea>
+    <div class="small faint" id="wc" style="margin-top:6px">0 words</div>
+    <div style="display:flex;gap:14px;align-items:end;margin-top:14px;flex-wrap:wrap">
+      <div style="width:180px"><label class="l" for="date">Meeting date</label><input type="date" name="date" id="date" value="{{ date }}"></div>
+      <div><label class="l">Speed</label><div class="seg"><input type="radio" name="speed" id="s1" value="turbo"><label for="s1">Fastest</label><input type="radio" name="speed" id="s2" value="balanced" checked><label for="s2">Most careful</label></div></div>
+      <button class="btn primary" id="go" style="margin-left:auto"><span id="golabel">Process debrief</span></button>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Sample debriefs</h2>
+    <p class="small muted" style="margin-top:-6px">Real broker phrasing, with the traps a careless tool falls into.</p>
+    {% for s in samples %}
+    <button type="button" class="sample" data-t="{{ s['Transcript (what the broker says)'] }}" data-d="{{ s['Date'] }}">
+      <b>{{ s['Meeting'] }} · {{ {'D1':'Northpoint Logistics','D2':'Cedar Row Office','D3':'Trinity Commons'}[s['Deal ID']] }}</b>
+      <span>{{ fmt_date(s['Date']) }} · {{ s['Words'] }} words · Tests: {{ s['Traps it tests'].split(';')[0] }}</span></button>
+    {% endfor %}
+    <p class="small faint">Run them in order (Nov 2, 3, 4, then 20) to see the retrade update the Northpoint deal.</p>
+  </div>
+</div>
+</form>
+{% endblock %}
+{% block scripts %}
+<script>
+const ta=document.getElementById('transcript'),wc=document.getElementById('wc');
+const count=()=>{wc.textContent=(ta.value.trim()?ta.value.trim().split(/\s+/).length:0)+' words'};ta.addEventListener('input',count);count();
+document.querySelectorAll('.sample').forEach(b=>b.onclick=()=>{ta.value=b.dataset.t;document.getElementById('date').value=b.dataset.d;count();ta.focus()});
+const f=document.getElementById('f');f.onsubmit=()=>{const g=document.getElementById('go');g.disabled=true;const t0=Date.now();
+  const tick=()=>{document.getElementById('golabel').textContent='Reading the debrief… '+((Date.now()-t0)/1000).toFixed(1)+' s';};tick();setInterval(tick,100)};
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition,rec=document.getElementById('rec'),st=document.getElementById('recstate');
+let r=null,on=false,base='',silence;
+if(!SR){st.textContent='Dictation needs Chrome or Edge. You can type or paste instead.';rec.disabled=true;rec.style.opacity=.5}
+rec.onclick=()=>{ if(!SR)return; if(on){r.stop();return}
+  r=new SR();r.lang='en-US';r.continuous=true;r.interimResults=true;base=ta.value?ta.value.trim()+' ':'';
+  r.onresult=e=>{let fin='',int='';for(const x of e.results){(x.isFinal?fin+=x[0].transcript+' ':int+=x[0].transcript)}ta.value=base+fin+int;count();
+    clearTimeout(silence);silence=setTimeout(()=>r&&r.stop(),4000)};
+  r.onstart=()=>{on=true;rec.classList.add('live');st.textContent='Listening… stops after 4 seconds of silence'};
+  r.onend=()=>{on=false;rec.classList.remove('live');st.textContent='Done. Check the text, then process.'};
+  r.start()};
+</script>
+{% endblock %}

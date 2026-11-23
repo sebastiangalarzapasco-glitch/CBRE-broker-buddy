@@ -1,0 +1,45 @@
+{% extends "base.html" %}{% block title %}{{ d.name }}{% endblock %}
+{% block body %}
+{% if shared %}<div class="banner"><span><b>Shared deal brief</b> · Read-only view for the deal team</span><span class="small">Broker Buddy</span></div>{% else %}
+<div style="display:flex;gap:8px;margin-bottom:14px">{% for x in [('D1','Northpoint Logistics'),('D2','Cedar Row Office'),('D3','Trinity Commons')] %}<a class="btn sm {{ 'primary' if d.id==x[0] }}" href="{{ url_for('deal', deal_id=x[0]) }}">{{ x[1] }}</a>{% endfor %}</div>{% endif %}
+<div class="hero">
+  <div><div class="eyebrow">{{ d.asset_type }} · {{ d.stage }}</div><h1>{{ d.name }}</h1><p class="sub">{{ d.address }} · Seller: {{ d.seller }}</p></div>
+  <div class="hero-stats">
+    <div><div class="v">{{ d.headline_price }}</div><div class="l">Agreed price</div></div>
+    <div><div class="v">${{ '{:,.0f}'.format(d.noi) }}</div><div class="l">T-12 NOI</div></div>
+    <div><div class="v">{{ '{:,.0f}'.format(d.size) }}</div><div class="l">{{ d.size_unit }}</div></div>
+    <div><div class="v">{{ '%.0f'|format(d.occupancy*100) }}%</div><div class="l">Occupied</div></div>
+  </div>
+</div>
+{% if not shared %}<div style="display:flex;justify-content:flex-end;gap:8px;margin:-6px 0 16px"><button class="btn sm" onclick="navigator.clipboard.writeText(location.origin+'{{ url_for('share', token=d.share_token) }}');this.textContent='Link copied'">Share with team</button><a class="btn sm primary" href="{{ url_for('debrief') }}">New debrief</a></div>{% endif %}
+
+<div class="grid g32">
+  <div class="grid" style="align-content:start">
+    <div class="card flush"><div class="hd"><h2 style="margin:0">Deal terms</h2><span class="small faint">Hover a value for the words it came from</span></div>
+      {% for t in d.terms if t.status!='internal_confidential' or not shared %}
+      <div class="term" title="{{ t.evidence }}"><div class="k">{{ t.label }}</div><div class="v {{ 'nm' if t.status=='not_mentioned' }}">{{ t.value }}</div>
+        <div>{% if t.status=='internal_confidential' %}<span class="chip red">Internal only</span>{% elif t.status=='calculated' %}<span class="chip">Calculated</span>{% elif t.status=='not_mentioned' %}<span class="chip amber">Not mentioned</span>{% endif %}</div></div>
+      {% else %}<div class="empty">No terms yet. Record a debrief after the first meeting.</div>{% endfor %}
+    </div>
+    <div class="card flush"><div class="hd"><h2 style="margin:0">{{ 'Rent roll' if tenants else 'Unit mix' }}</h2><span class="small faint">From the T-12 package</span></div>
+      <table>{% if tenants %}<tr><th>Tenant</th><th>SF</th><th>Rent / SF</th><th>Expires</th></tr>
+        {% for t in tenants %}{% set soon = t.expiration and (t.expiration[:10] < (today_d.replace(year=today_d.year+1)).isoformat()) %}
+        <tr><td><b>{{ t.tenant }}</b>{% if t.note %}<div class="small faint">{{ t.note }}</div>{% endif %}</td><td class="mono">{{ '{:,.0f}'.format(t.sf) }}</td><td class="mono">{{ '$%.2f'|format(t.rent_psf) if t.rent_psf else '' }}</td>
+        <td>{% if t.expiration %}{{ fmt_date(t.expiration[:10]) }}{% if soon %} <span class="chip amber">Within 12 months</span>{% endif %}{% endif %}</td></tr>{% endfor %}
+      {% else %}<tr><th>Unit type</th><th>Units</th><th>Occupied</th><th>Rent / month</th></tr>{% for u in units %}<tr><td><b>{{ u.unit_type }}</b> <span class="faint small">{{ u.avg_sf|int }} SF</span></td><td>{{ u.units }}</td><td>{{ u.occupied }}</td><td class="mono">${{ '{:,.0f}'.format(u.rent) }}</td></tr>{% endfor %}{% endif %}
+      </table></div>
+    {% if changes %}<div class="card"><h2>Change log</h2>{% for c in changes %}<div class="small" style="padding:4px 0">{{ fmt_date(c.date) }} · {{ c.field|replace('_',' ')|capitalize }}: <s class="faint">{{ c.old }}</s> → <b>{{ c.new }}</b></div>{% endfor %}</div>{% endif %}
+  </div>
+  <div class="grid" style="align-content:start">
+    <div class="card flush"><div class="hd"><h2 style="margin:0">Coming up</h2></div>
+      {% for a in alerts %}<div class="alert" style="grid-template-columns:76px 1fr"><div><div class="when {{ 'urgent' if a.urgent and a.days>=0 else 'soon' if a.days<=14 else '' }}">{{ a.when }}</div><div class="date-pill">{{ fmt_date(a.date) }}</div></div><div class="small"><b>{{ a.label }}</b></div></div>
+      {% else %}<div class="empty">No dates yet.</div>{% endfor %}</div>
+    <div class="card"><h2>Tasks</h2><ul class="list">{% for a in actions %}<li>
+      {% if not shared %}<form method="post" action="{{ url_for('done', aid=a.id) }}"><button class="check {{ 'on' if a.done }}" title="Mark done"></button></form>{% endif %}
+      <div style="flex:1" class="small {{ 'faint' if a.done }}"><b>{{ a.description }}</b><div class="muted">{{ a.owner_label }} · {{ fmt_date(a.due_date) if a.due_date else a.due_text }}</div></div></li>
+      {% else %}<li class="faint small">No tasks yet.</li>{% endfor %}</ul></div>
+    <div class="card"><h2>People</h2>{% for p in people %}<div class="person"><span class="av {{ 'ext' if p.side=='External' }}">{{ p.name.split()[0][0] }}{{ p.name.split()[-1][0] }}</span><div><b class="small">{{ p.name }}</b><div class="small muted">{{ p.role }}, {{ p.company }}</div></div></div>{% endfor %}</div>
+    {% if debriefs and not shared %}<div class="card"><h2>Debriefs</h2>{% for b in debriefs %}<div class="small" style="padding:4px 0"><a href="{{ url_for('debrief_result', bid=b.id) }}">{{ fmt_date(b.date) }}</a> · {{ b.transcript.split()|length }} words · {{ '%.1f'|format(b.seconds) }} s</div>{% endfor %}</div>{% endif %}
+  </div>
+</div>
+{% endblock %}

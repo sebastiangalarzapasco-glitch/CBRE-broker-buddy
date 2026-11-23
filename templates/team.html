@@ -1,0 +1,25 @@
+{% extends "base.html" %}{% block title %}Team{% endblock %}
+{% block body %}
+<div class="ph"><div><div class="eyebrow">Share with teammates</div><h1>Deal team board</h1>
+<p class="sub">Every task from every debrief, assigned to a person. Share a read-only deal brief with one link.</p></div></div>
+{% if unassigned %}
+<div class="card" style="margin-bottom:18px"><h2>Needs an owner</h2>
+  {% for a in unassigned %}<div style="display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)">
+    <div style="flex:1"><b class="small">{{ a.description }}</b><div class="small faint">{{ a.deal }} · "{{ a.evidence }}"</div></div>
+    <form method="post" action="{{ url_for('assign', aid=a.id) }}" style="display:flex;gap:8px"><select name="owner" style="width:170px">{% for p in people %}<option value="{{ p.id }}">{{ p.name }}</option>{% endfor %}</select><button class="btn sm primary">Assign</button></form></div>{% endfor %}
+</div>{% endif %}
+<div class="grid g3">
+{% for p in people %}
+  <div class="card"><div class="person" style="padding-top:0"><span class="av">{{ p.name.split()[0][0] }}{{ p.name.split()[1][0] }}</span><div><b>{{ p.name }}</b><div class="small muted">{{ p.role }}</div></div></div>
+    <ul class="list">{% for a in board[p.id] %}<li><form method="post" action="{{ url_for('done', aid=a.id) }}"><button class="check {{ 'on' if a.done }}" title="Mark done"></button></form>
+      <div class="small {{ 'faint' if a.done }}" style="flex:1"><b>{{ a.description }}</b><div class="muted">{{ a.deal }} · {{ fmt_date(a.due_date) if a.due_date else a.due_text }}</div></div></li>
+    {% else %}<li class="small faint">Nothing assigned.</li>{% endfor %}</ul></div>
+{% endfor %}
+</div>
+<div class="grid g2" style="margin-top:18px">
+  <div class="card"><h2>Waiting on outside parties</h2><ul class="list">{% for a in external %}<li class="small"><div style="flex:1"><b>{{ a.description }}</b><div class="muted">{{ a.owner_label }} · {{ a.deal }}</div></div><span class="faint">{{ fmt_date(a.due_date) if a.due_date else a.due_text }}</span></li>{% else %}<li class="small faint">Nothing outstanding.</li>{% endfor %}</ul></div>
+  <div class="card"><h2>Share a deal brief</h2><p class="small muted" style="margin-top:-6px">Read-only. Internal estimates are hidden.</p>
+    {% for d in deals %}<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)"><b class="small">{{ d.name }}</b>
+      <span style="display:flex;gap:6px"><a class="btn sm" href="{{ url_for('share', token=d.share_token) }}" target="_blank">Open</a><button class="btn sm" onclick="navigator.clipboard.writeText(location.origin+'{{ url_for('share', token=d.share_token) }}');this.textContent='Copied'">Copy link</button></span></div>{% endfor %}</div>
+</div>
+{% endblock %}

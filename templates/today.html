@@ -1,0 +1,82 @@
+{% extends "base.html" %}{% block title %}Today{% endblock %}
+{% block body %}
+<div class="ph">
+  <div><div class="eyebrow">{{ today.strftime('%A, %B') }} {{ today.day }}, {{ today.year }}</div>
+  <h1>Hi {{ speaker.split()[0] }}, here's what's next</h1>
+  <p class="sub">What needs you next, before you have to ask.</p></div>
+  <a class="btn primary" href="{{ url_for('debrief') }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3Zm6-3a6 6 0 0 1-12 0m6 6v3"/></svg>Record a debrief</a>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="l">Due in the next 14 days</div><div class="v">{{ soon|length }}</div></div>
+  <div class="kpi"><div class="l">Emails waiting for review</div><div class="v">{{ review_count }}</div></div>
+  <div class="kpi"><div class="l">Open team tasks</div><div class="v">{{ tasks.values()|map('length')|sum }}</div></div>
+  <div class="kpi"><div class="l">Needs your decision</div><div class="v">{{ sugg|length }}</div></div>
+</div>
+
+<div class="grid g32">
+  <div class="grid" style="align-content:start">
+    <div class="card flush">
+      <div class="hd"><h2 style="margin:0">Next meetings</h2><a class="small" href="{{ url_for('meetings_page') }}">All meetings →</a></div>
+      {% for m in upcoming %}
+      <a class="meet" href="{{ url_for('meeting_brief', mid=m.id) }}">
+        <div><div class="t {{ 'soon' if m.prep_ready }}">{{ m.when }}</div></div>
+        <div><b>{{ m.title }} · {{ m.contact }}</b><div class="small muted">{{ m.company }} · {{ m.deal }}</div></div>
+        <span class="chip {{ 'amber' if m.prep_ready else 'green' }}">Prep brief</span>
+      </a>
+      {% else %}<div class="empty">No meetings coming up.</div>{% endfor %}
+    </div>
+    <div class="card flush">
+      <div class="hd"><h2 style="margin:0">One step ahead</h2><span class="chip">Alerts {{ 3 }} days before each date</span></div>
+      {% for a in soon %}
+      <div class="alert">
+        <div><div class="when {{ 'urgent' if a.days<=3 else 'soon' }}">{{ a.when }}</div><div class="date-pill">{{ fmt_date(a.date) }}</div></div>
+        <div><b>{{ a.label }}</b><div class="small muted"><a href="{{ url_for('deal', deal_id=a.deal_id) }}">{{ a.deal }}</a></div></div>
+        <span class="chip {{ 'red' if a.kind=='deal' and 'Deposit' in a.label else 'amber' if a.kind=='lease' else 'blue' if a.kind=='task' else 'green' }}">{{ {'deal':'Deal date','task':'Task','lease':'Lease'}[a.kind] }}</span>
+      </div>
+      {% else %}<div class="empty">Nothing due in the next two weeks. Record a debrief to start tracking a deal.</div>{% endfor %}
+      {% if later %}<div class="hd" style="border-top:1px solid var(--line);border-bottom:0"><span class="small muted">Later: {% for a in later[:4] %}{{ a.label }} ({{ fmt_date(a.date) }}){{ ', ' if not loop.last }}{% endfor %}</span></div>{% endif %}
+    </div>
+
+    <div class="card">
+      <h2>Your deals</h2>
+      <div class="grid g3">
+      {% for d in deals %}
+        <a class="card deal-card" href="{{ url_for('deal', deal_id=d.id) }}" style="box-shadow:none;padding:16px">
+          <span class="chip {{ 'green' if d.stage!='New' else '' }}">{{ d.stage }}</span>
+          <h3 style="margin-top:10px">{{ d.name }}</h3>
+          <div class="small muted">{{ d.asset_type }} · {{ '{:,.0f}'.format(d.size) }} {{ d.size_unit }}</div>
+          <div style="margin-top:10px;font-weight:700">{{ d.headline_price }}</div>
+          <div class="small faint">{{ d.open_actions }} open tasks</div>
+        </a>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="grid" style="align-content:start">
+    {% if sugg or unassigned %}
+    <div class="card">
+      <h2>Needs your decision</h2>
+      <ul class="list">
+      {% for s in sugg %}
+        <li><span class="chip {{ 'amber' if s.kind in ('missing','assign') else 'blue' }}">{{ {'missing':'Missing','assign':'Owner','new_contact':'New contact','no_email':'No email'}[s.kind] }}</span>
+          <div style="flex:1"><div class="small">{{ s.text }}</div><div class="small faint">{{ s.deal }}</div></div>
+          <form method="post" action="{{ url_for('dismiss', sid=s.id) }}"><button class="btn sm ghost" title="Mark handled">Done</button></form></li>
+      {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    <div class="card">
+      <h2>Team tasks</h2>
+      {% for name, ts in tasks.items() %}
+        <div class="person"><span class="av">{{ name.split()[0][0] }}{{ name.split()[1][0] }}</span><div style="flex:1"><b>{{ name }}</b><div class="small muted">{{ ts|length }} open</div></div></div>
+        <ul class="list" style="margin:0 0 8px 44px">
+        {% for t in ts[:3] %}<li class="small"><div style="flex:1">{{ t.description }}<div class="faint">{{ t.deal }}</div></div><span class="faint">{{ fmt_date(t.due_date) if t.due_date else t.due_text }}</span></li>{% endfor %}
+        </ul>
+      {% endfor %}
+      <a class="small" href="{{ url_for('team') }}">Open the team board →</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
